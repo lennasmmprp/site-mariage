@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mariage de Séverine et Yasser — 21 juillet 2027, Provence">
+  <title>Séverine &amp; Yasser — Mariage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hero-bg">
+
+  <img src="image site web.jpg.png" alt="" class="plein-ecran image-fond" aria-hidden="true">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">S <span class="logo-amp">&amp;</span> Y</a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li><a href="index.html"  class="nav__link active" aria-current="page">Accueil</a></li>
+          <li><a href="infos.html"  class="nav__link">Infos pratiques</a></li>
+          <li><a href="rsvp.html"   class="nav__link nav__link--cta">Confirmez votre venue</a></li>
+        </ul>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle"
+              aria-label="Ouvrir le menu"
+              aria-expanded="false"
+              aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+
+        <p class="hero__eyebrow">Vous êtes conviés à notre mariage</p>
+
+        <img src="images/olivier.jpg" alt="" class="hero__ornament" aria-hidden="true" style="mix-blend-mode: multiply; background: transparent;">
+
+        <!-- À PERSONNALISER : prénoms des mariés -->
+        <h1 class="hero__names">
+          <span class="hero__name hero__name--l">Séverine</span>
+          <span class="amp">&amp;</span>
+          <span class="hero__name hero__name--r">Yasser</span>
+        </h1>
+
+        <div class="hero__date-row">
+          <span class="line"></span>
+          <!-- À PERSONNALISER : date du mariage -->
+          <p class="hero__date">Mercredi 21 Juillet 2027</p>
+          <span class="line"></span>
+        </div>
+
+        <!-- Cartes de lieux -->
+        <div class="hero-venues">
+
+          <div class="hero-venue-card">
+            <p class="hero-venue-card__time">13h00</p>
+            <p class="hero-venue-card__title">Cérémonie civile</p>
+            <p class="hero-venue-card__place">Mairie de Longjumeau</p>
+            <p class="hero-venue-card__address">6 bis Rue Léontine Sohier<br>91160 Longjumeau</p>
+            <p class="hero-venue-card__footer">
+              Parking disponible &nbsp;·&nbsp;
+              <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e5d877b1694e25:0xdaa2a3add6be272"
+                 target="_blank" rel="noopener" class="hero-venue-card__link">
+                Voir sur Google Maps →
+              </a>
+            </p>
+          </div>
+
+          <div class="hero-venue-card">
+            <p class="hero-venue-card__time">16h00</p>
+            <p class="hero-venue-card__title">Soirée &amp; Réception</p>
+            <p class="hero-venue-card__place">Domaine des Rois</p>
+            <p class="hero-venue-card__address">LA VENERIE, RD213<br>77830 Échouboulains</p>
+            <p class="hero-venue-card__footer">
+              Parking disponible &nbsp;·&nbsp;
+              <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47ef5b4dc95c3ab5:0x2cfeebf78aab0212"
+                 target="_blank" rel="noopener" class="hero-venue-card__link">
+                Voir sur Google Maps →
+              </a>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Compte à rebours (mis à jour par js/main.js) -->
+        <div class="countdown" id="countdown" aria-live="polite" aria-label="Compte à rebours">
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-days">--</span>
+            <span class="countdown__label">Jours</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-hours">--</span>
+            <span class="countdown__label">Heures</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-minutes">--</span>
+            <span class="countdown__label">Minutes</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-seconds">--</span>
+            <span class="countdown__label">Secondes</span>
+          </div>
+        </div>
+
+        <a href="rsvp.html" class="btn btn--primary">Répondre à l'invitation</a>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__names">Séverine &amp; Yasser</p>
+      <p class="footer__date">21 Juillet 2027</p>
+      <nav class="footer__nav" aria-label="Navigation secondaire">
+        <a href="index.html">Accueil</a>
+        <span class="sep">·</span>
+        <a href="infos.html">Infos pratiques</a>
+        <span class="sep">·</span>
+        <a href="rsvp.html">Confirmez votre venue</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
