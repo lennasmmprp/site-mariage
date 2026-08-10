@@ -11,9 +11,12 @@
   /* Verts */
   --c-green:           #7EA86A;   /* vert doux — éléments naturels, nav secondaire */
   --c-green-h:         #6B9257;   /* vert doux, survol */
-  --c-olive:           #A1AB5B;   /* vert olive — accents, interactions, boutons d'action */
+  --c-olive:           #A1AB5B;   /* vert olive — accents, détails (hors boutons/hover, voir jaune beurre) */
   --c-olive-h:         #8A9449;   /* vert olive, survol */
-  --c-olive-pale:      #AFB871;   /* vert olive éclairci — fond des boutons principaux (contraste avec le texte bleu roi) */
+
+  /* Jaune beurre — boutons & indicateurs de survol (remplace le vert olive sur ces éléments) */
+  --c-beurre:          #F5DFA0;
+  --c-beurre-h:        #EFD589;
 
   /* Bleu pastel */
   --c-blue-pastel:     #ACD1D5;   /* bleu pastel — respirations, fonds doux */
@@ -148,18 +151,18 @@ img  { display: block; max-width: 100%; }
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--c-olive);
+  background: var(--c-beurre);
   transition: width 0.3s var(--ease);
 }
 
 .nav__link:hover,
-.nav__link.active { color: var(--c-olive); }
+.nav__link.active { color: var(--c-beurre); }
 
 .nav__link:hover::after,
 .nav__link.active::after { width: 100%; }
 
 .nav__link--cta {
-  background: var(--c-olive-pale);
+  background: var(--c-beurre);
   color: var(--c-blue) !important;
   padding: 0.6rem 1.5rem;
   border-radius: 1px;
@@ -167,7 +170,7 @@ img  { display: block; max-width: 100%; }
 }
 
 .nav__link--cta::after { display: none; }
-.nav__link--cta:hover { background: var(--c-olive); }
+.nav__link--cta:hover { background: var(--c-beurre-h); }
 
 /* Mobile toggle */
 .nav__toggle {
@@ -436,11 +439,11 @@ img  { display: block; max-width: 100%; }
 .btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background: var(--c-olive-pale);
+  background: var(--c-beurre);
   color: var(--c-blue);
 }
 
-.btn--primary:hover { background: var(--c-olive); }
+.btn--primary:hover { background: var(--c-beurre-h); }
 
 .btn--outline {
   background: transparent;
@@ -595,6 +598,25 @@ img  { display: block; max-width: 100%; }
   color: var(--c-text-mid);
   margin-top: 0.4rem;
   line-height: 1.65;
+}
+
+.timeline__map-link {
+  display: inline-block;
+  font-family: var(--f-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-blue);
+  border: 1px solid var(--c-blue);
+  padding: 0.5rem 1.1rem;
+  margin-top: 0.7rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.timeline__map-link:hover {
+  background: var(--c-blue);
+  color: var(--c-cream);
 }
 
 /* RSVP Form */
@@ -778,7 +800,7 @@ img  { display: block; max-width: 100%; }
 }
 
 .footer__nav a { transition: color 0.2s; }
-.footer__nav a:hover { color: var(--c-olive); }
+.footer__nav a:hover { color: var(--c-beurre); }
 .footer__nav .sep { color: var(--c-sand-border); }
 
 /* ======================================================
@@ -902,7 +924,7 @@ body.hero-bg .footer__nav .sep {
   }
   body.hero-bg .nav__link:hover,
   body.hero-bg .nav__link.active {
-    color: var(--c-olive);
+    color: var(--c-beurre);
   }
 
   .countdown__item { padding: 0 1.25rem; }
@@ -1127,9 +1149,9 @@ body.hero-bg .footer__nav .sep {
   transition: color 0.25s;
 }
 
-.accordion__btn:hover { color: var(--c-olive); }
+.accordion__btn:hover { color: var(--c-beurre); }
 
-.accordion__btn[aria-expanded="true"] { color: var(--c-olive); }
+.accordion__btn[aria-expanded="true"] { color: var(--c-beurre); }
 
 .accordion__icon {
   flex-shrink: 0;
