@@ -16,6 +16,14 @@
      ===================================================== */
   const heroVideo = document.getElementById('hero-video');
   if (heroVideo) {
+    // Forcer les propriétés JS en plus des attributs HTML : sur iOS Safari,
+    // l'autoplay n'est fiable que si "muted"/"playsInline" sont bien à `true`
+    // côté IDL au moment de l'appel à play(), pas seulement en attributs.
+    heroVideo.muted        = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.playsInline  = true;
+    heroVideo.autoplay     = true;
+
     const tryPlay = () => {
       const p = heroVideo.play();
       if (p && typeof p.catch === 'function') {
@@ -24,8 +32,16 @@
     };
 
     tryPlay();
+    heroVideo.addEventListener('loadedmetadata', tryPlay);
     heroVideo.addEventListener('loadeddata', tryPlay);
     heroVideo.addEventListener('canplay', tryPlay);
+    heroVideo.addEventListener('canplaythrough', tryPlay);
+    heroVideo.addEventListener('pause', tryPlay);
+    window.addEventListener('load', tryPlay);
+
+    // Retour depuis le cache navigateur (bouton précédent / bfcache) :
+    // le script ne se ré-exécute pas, on retente explicitement.
+    window.addEventListener('pageshow', tryPlay);
 
     // Filet de secours : si le navigateur bloque encore l'autoplay,
     // la toute première interaction (tap, scroll, touche) relance la
