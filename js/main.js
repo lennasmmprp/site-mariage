@@ -12,6 +12,37 @@
     '1FAIpQLSe_nuM0FVCkLa0zyNlaANkvvysuvrlAoeglCeBvkFLF0MYuxA/formResponse';
 
   /* =====================================================
+     Vidéo de fond du hero — autoplay robuste (mobile)
+     ===================================================== */
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    const tryPlay = () => {
+      const p = heroVideo.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => { /* autoplay refusé pour l'instant, on retentera */ });
+      }
+    };
+
+    tryPlay();
+    heroVideo.addEventListener('loadeddata', tryPlay);
+    heroVideo.addEventListener('canplay', tryPlay);
+
+    // Filet de secours : si le navigateur bloque encore l'autoplay,
+    // la toute première interaction (tap, scroll, touche) relance la
+    // lecture silencieusement — aucun bouton Play n'est affiché,
+    // aucune action explicite n'est demandée à l'utilisateur.
+    const resumeOnFirstInteraction = () => {
+      tryPlay();
+      ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(evt =>
+        window.removeEventListener(evt, resumeOnFirstInteraction)
+      );
+    };
+    ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(evt =>
+      window.addEventListener(evt, resumeOnFirstInteraction, { once: true, passive: true })
+    );
+  }
+
+  /* =====================================================
      Header : transparent → opaque au scroll
      ===================================================== */
   const header = document.getElementById('header');
