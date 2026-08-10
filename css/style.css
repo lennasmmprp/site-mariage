@@ -102,6 +102,18 @@ video.plein-ecran::-webkit-media-controls-play-button {
   -webkit-appearance: none;
 }
 
+/* Image de secours (1er visuel du hero) : visible par défaut, recouvre
+   la vidéo tant que la lecture n'est pas confirmée. Masquée en JS dès
+   que la vidéo démarre réellement (évènement "playing") — jamais
+   d'écran noir ni de bouton Play visible entre-temps. */
+#hero-fallback {
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#hero-fallback.is-hidden {
+  opacity: 0;
+}
+
 /* ======================================================
    Header
    ====================================================== */

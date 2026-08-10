@@ -12,10 +12,14 @@
     '1FAIpQLSe_nuM0FVCkLa0zyNlaANkvvysuvrlAoeglCeBvkFLF0MYuxA/formResponse';
 
   /* =====================================================
-     Vidéo de fond du hero — autoplay robuste (mobile)
+     Vidéo de fond du hero — autoplay robuste + fallback image
+     (notamment iPhone en mode économie d'énergie, où Safari
+     refuse l'autoplay sans jamais le signaler autrement)
      ===================================================== */
-  const heroVideo = document.getElementById('hero-video');
-  if (heroVideo) {
+  const heroVideo    = document.getElementById('hero-video');
+  const heroFallback = document.getElementById('hero-fallback');
+
+  if (heroVideo && heroFallback) {
     // Forcer les propriétés JS en plus des attributs HTML : sur iOS Safari,
     // l'autoplay n'est fiable que si "muted"/"playsInline" sont bien à `true`
     // côté IDL au moment de l'appel à play(), pas seulement en attributs.
@@ -24,10 +28,21 @@
     heroVideo.playsInline  = true;
     heroVideo.autoplay     = true;
 
+    // L'image de secours est visible par défaut (voir HTML/CSS) et ne
+    // disparaît QUE lorsque la vidéo confirme réellement jouer — jamais
+    // sur la base d'une simple tentative de play().
+    const hideFallback = () => heroFallback.classList.add('is-hidden');
+    const showFallback = () => heroFallback.classList.remove('is-hidden');
+
+    heroVideo.addEventListener('playing', hideFallback);
+    heroVideo.addEventListener('pause',   showFallback);
+    heroVideo.addEventListener('stalled', showFallback);
+    heroVideo.addEventListener('error',   showFallback);
+
     const tryPlay = () => {
       const p = heroVideo.play();
       if (p && typeof p.catch === 'function') {
-        p.catch(() => { /* autoplay refusé pour l'instant, on retentera */ });
+        p.catch(() => { /* autoplay refusé — l'image de secours reste affichée */ });
       }
     };
 
@@ -36,17 +51,15 @@
     heroVideo.addEventListener('loadeddata', tryPlay);
     heroVideo.addEventListener('canplay', tryPlay);
     heroVideo.addEventListener('canplaythrough', tryPlay);
-    heroVideo.addEventListener('pause', tryPlay);
     window.addEventListener('load', tryPlay);
 
     // Retour depuis le cache navigateur (bouton précédent / bfcache) :
     // le script ne se ré-exécute pas, on retente explicitement.
     window.addEventListener('pageshow', tryPlay);
 
-    // Filet de secours : si le navigateur bloque encore l'autoplay,
-    // la toute première interaction (tap, scroll, touche) relance la
-    // lecture silencieusement — aucun bouton Play n'est affiché,
-    // aucune action explicite n'est demandée à l'utilisateur.
+    // Premier geste de l'utilisateur (tap, scroll, touche) : on retente
+    // silencieusement — aucun bouton Play, aucune action explicite requise.
+    // Si la lecture démarre, "playing" ci-dessus masquera l'image seul.
     const resumeOnFirstInteraction = () => {
       tryPlay();
       ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(evt =>
