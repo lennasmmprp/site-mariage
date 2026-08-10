@@ -200,52 +200,6 @@
   }
 
   /* =====================================================
-     Tabs — infos.html
-     ===================================================== */
-  const tabBtns      = document.querySelectorAll('.tabs__btn');
-  const tabPanels    = document.querySelectorAll('.tabs__panel');
-  const tabIndicator = document.querySelector('.tabs__indicator');
-
-  function setIndicator(btn) {
-    if (!tabIndicator) return;
-    tabIndicator.style.left  = btn.offsetLeft + 'px';
-    tabIndicator.style.width = btn.offsetWidth + 'px';
-  }
-
-  if (tabBtns.length) {
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => {
-          b.classList.remove('is-active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        tabPanels.forEach(p => p.classList.remove('is-active'));
-
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-selected', 'true');
-        const panel = document.getElementById('tab-' + btn.dataset.tab);
-        if (panel) {
-          panel.classList.add('is-active');
-          panel.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(el => {
-            setTimeout(() => el.classList.add('is-visible'), 150);
-          });
-        }
-        setIndicator(btn);
-      });
-    });
-
-    requestAnimationFrame(() => {
-      const activeBtn = document.querySelector('.tabs__btn.is-active');
-      if (activeBtn) setIndicator(activeBtn);
-    });
-
-    window.addEventListener('resize', () => {
-      const activeBtn = document.querySelector('.tabs__btn.is-active');
-      if (activeBtn) setIndicator(activeBtn);
-    }, { passive: true });
-  }
-
-  /* =====================================================
      Accordion — FAQ
      ===================================================== */
   document.querySelectorAll('.accordion__btn').forEach(btn => {

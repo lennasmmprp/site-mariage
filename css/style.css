@@ -1,21 +1,36 @@
 /* ======================================================
-   Variables
+   Variables — charte graphique officielle
    ====================================================== */
 :root {
-  --c-cream:          #F5F5DC;
-  --c-sand:           #EDEDC9;
-  --c-sand-border:    #DCDBC0;
-  --c-terracotta:     #DDAA33;   /* jaune moutarde — fonds de boutons */
-  --c-terracotta-h:   #C4941F;   /* jaune moutarde, survol */
-  --c-terracotta-text:#A67C1F;   /* jaune moutarde foncé — lisible en texte */
-  --c-olive:          #556B2F;   /* vert olive — petites touches (puces, traits, focus) */
-  --c-olive-light:    #7A9152;
-  --c-blue:           #114477;   /* bleu canard — titres */
-  --c-blue-mid:       #1B5A8F;
-  --c-text:           #333333;   /* gris anthracite — corps de texte */
-  --c-text-mid:       #4D4D4D;
-  --c-text-muted:     #8A8A82;
-  --c-white:          #FFFFFF;
+  /* Fond / neutres */
+  --c-cream:          #FDFBF0;   /* ivoire — fond principal, cartes, zones de lecture */
+  --c-champagne:       #F3E9B5;   /* jaune pâle — fond secondaire, encadrés, bandeaux */
+  --c-champagne-h:     #EADC96;   /* champagne, survol / plus soutenu */
+  --c-sand-border:     #E7DFC0;   /* bordure discrète, dérivée de la charte */
+
+  /* Verts */
+  --c-green:           #7EA86A;   /* vert doux — éléments naturels, nav secondaire */
+  --c-green-h:         #6B9257;   /* vert doux, survol */
+  --c-olive:           #A1AB5B;   /* vert olive — accents, interactions, boutons d'action */
+  --c-olive-h:         #8A9449;   /* vert olive, survol */
+  --c-olive-pale:      #AFB871;   /* vert olive éclairci — fond des boutons principaux (contraste avec le texte bleu roi) */
+
+  /* Bleu pastel */
+  --c-blue-pastel:     #ACD1D5;   /* bleu pastel — respirations, fonds doux */
+  --c-blue-pastel-h:   #8FC0C5;   /* bleu pastel, plus soutenu */
+
+  /* Terre cuite */
+  --c-terracotta:      #954E2A;   /* terre cuite — accents chaleureux, séparateurs, décor */
+  --c-terracotta-h:    #7A3F21;   /* terre cuite, plus profonde */
+
+  /* Bleu roi — valeur déjà existante du site, conservée pour les titres/labels/boutons */
+  --c-blue:            #114477;
+
+  /* Texte courant */
+  --c-text:            #333333;   /* corps de texte */
+  --c-text-mid:        #4D4D4D;
+  --c-text-muted:      #8C9270;   /* teinte discrète dérivée du vert olive */
+  --c-white:           #FFFFFF;
 
   --f-serif: 'Cormorant Garamond', Georgia, serif;
   --f-title: 'Pinyon Script', Georgia, serif;
@@ -57,7 +72,7 @@ img  { display: block; max-width: 100%; }
   position: fixed;   /* "fixed" plutôt que "absolute" : reste calée sur tout
                          l'écran même quand la page défile (le pied de page
                          est plus bas que 100vh, "absolute" aurait laissé
-                         réapparaître le fond beige en bas de page) */
+                         réapparaître le fond en bas de page) */
   top: 0;
   left: 0;
   width: 100%;
@@ -82,7 +97,7 @@ img  { display: block; max-width: 100%; }
 }
 
 .header--scrolled {
-  background: rgba(245, 245, 220, 0.97);
+  background: rgba(253, 251, 240, 0.97);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 1px 0 var(--c-sand-border);
@@ -102,18 +117,12 @@ img  { display: block; max-width: 100%; }
   font-family: var(--f-serif);
   font-size: 1.55rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--c-blue);
   transition: opacity 0.2s;
 }
 
 .header__logo:hover { opacity: 0.75; }
-
-.header__logo .logo-amp {
-  color: var(--c-terracotta-text);
-  font-style: italic;
-  font-weight: 300;
-}
 
 .nav__list {
   display: flex;
@@ -127,7 +136,7 @@ img  { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--c-text);
+  color: var(--c-blue);
   position: relative;
   transition: color 0.2s;
 }
@@ -144,21 +153,21 @@ img  { display: block; max-width: 100%; }
 }
 
 .nav__link:hover,
-.nav__link.active { color: var(--c-terracotta-text); }
+.nav__link.active { color: var(--c-olive); }
 
 .nav__link:hover::after,
 .nav__link.active::after { width: 100%; }
 
 .nav__link--cta {
-  background: var(--c-terracotta);
-  color: var(--c-text) !important;
+  background: var(--c-olive-pale);
+  color: var(--c-blue) !important;
   padding: 0.6rem 1.5rem;
   border-radius: 1px;
   transition: background 0.2s;
 }
 
 .nav__link--cta::after { display: none; }
-.nav__link--cta:hover { background: var(--c-terracotta-h); }
+.nav__link--cta:hover { background: var(--c-olive); }
 
 /* Mobile toggle */
 .nav__toggle {
@@ -211,7 +220,8 @@ img  { display: block; max-width: 100%; }
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 12% 88%, rgba(85, 107, 47, 0.05) 0%, transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(243, 233, 181, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 12% 88%, rgba(161, 171, 91, 0.05) 0%, transparent 55%),
     radial-gradient(circle at 88% 10%, rgba(17, 68, 119, 0.04) 0%, transparent 55%);
   pointer-events: none;
 }
@@ -232,61 +242,45 @@ img  { display: block; max-width: 100%; }
 /* Réinitialise le stagger générique */
 .hero__content > * { opacity: 1; animation: none; }
 
-/* 1 — Eyebrow : fondu très lent */
-.hero__eyebrow {
-  opacity: 0;
-  animation: hFade 1.1s ease 0.15s forwards;
-}
-
-/* 2 — Ornement : scale doux */
-.hero__ornament {
-  opacity: 0;
-  animation: hScale 1.1s cubic-bezier(0.34, 1.05, 0.64, 1) 0.7s forwards;
-}
-
-/* 3 — Prénoms : Séverine depuis gauche, Yasser depuis droite */
+/* 1 — Prénoms : Séverine depuis gauche, Yasser depuis droite (en premier, pour davantage de présence) */
 .hero__names    { opacity: 1; animation: none; }
 
 .hero__name--l {
   opacity: 0;
-  animation: hSlideL 1s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+  animation: hSlideL 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 .hero__name--r {
   opacity: 0;
-  animation: hSlideR 1s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+  animation: hSlideR 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
-/* 4 — & : pop au centre */
+/* 2 — "et" : pop au centre */
 .hero__names .amp {
   opacity: 0;
-  animation: hPop 0.75s cubic-bezier(0.34, 1.2, 0.64, 1) 2.05s forwards;
+  animation: hPop 0.75s cubic-bezier(0.34, 1.2, 0.64, 1) 0.9s forwards;
 }
 
-/* 5 — Date & lieu : glissement vers le haut */
-.hero__date-row {
+/* 3 — Sous-titre : fondu vers le haut, juste sous le titre */
+.hero__subtitle {
   opacity: 0;
-  animation: hUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.55s forwards;
-}
-.hero__location {
-  opacity: 0;
-  animation: hUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards;
+  animation: hUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
 }
 
-/* 6 — Countdown : rebond en cascade */
+/* 4 — Countdown : rebond en cascade */
 .hero .countdown        { opacity: 1; animation: none; }
 .hero .countdown__item  {
   opacity: 0;
   animation: hBounce 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
 }
-.hero .countdown__item:nth-child(1) { animation-delay: 3.2s; }
-.hero .countdown__item:nth-child(2) { animation-delay: 3.36s; }
-.hero .countdown__item:nth-child(3) { animation-delay: 3.52s; }
-.hero .countdown__item:nth-child(4) { animation-delay: 3.68s; }
+.hero .countdown__item:nth-child(1) { animation-delay: 1.7s; }
+.hero .countdown__item:nth-child(2) { animation-delay: 1.86s; }
+.hero .countdown__item:nth-child(3) { animation-delay: 2.02s; }
+.hero .countdown__item:nth-child(4) { animation-delay: 2.18s; }
 
-/* 7 — Bouton : apparaît en dernier */
+/* 5 — Bouton : apparaît en dernier */
 .hero .btn {
   opacity: 0;
-  animation: hUp 1s cubic-bezier(0.16, 1, 0.3, 1) 4s forwards;
+  animation: hUp 1s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
 }
 
 /* ── Keyframes ─────────────────────────────────────── */
@@ -323,46 +317,34 @@ img  { display: block; max-width: 100%; }
 
 /* Accessibilité — réduit les animations si l'utilisateur le demande */
 @media (prefers-reduced-motion: reduce) {
-  .hero__eyebrow, .hero__ornament,
+  .hero__subtitle,
   .hero__name--l, .hero__name--r, .hero__names .amp,
-  .hero__date-row, .hero__location, .hero-venues,
   .hero .countdown__item, .hero .btn {
     animation-duration: 1ms !important;
     animation-delay:    0ms !important;
     opacity: 1 !important;
     transform: none !important;
   }
-  .hero__ornament { opacity: 0.85 !important; }
 }
 
-.hero__eyebrow {
+.hero__subtitle {
   font-family: var(--f-sans);
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--c-text-muted);
+  margin-top: 0.35rem;
   margin-bottom: 1.75rem;
-}
-
-.hero__ornament {
-  width: 300px;
-  max-width: 88%;
-  margin-bottom: 1.75rem;
-  opacity: 0.85;
-  mix-blend-mode: multiply;
 }
 
 .hero__names {
   font-family: var(--f-title);
-  font-size: clamp(1.6rem, 6vw, 4rem);
+  font-size: clamp(2rem, 7.5vw, 4.75rem);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--c-blue);
   letter-spacing: -0.01em;
-  margin-top: 1em;
-  margin-bottom: 1.75rem;
-  white-space: nowrap;
 }
 
 .hero__name {
@@ -372,125 +354,11 @@ img  { display: block; max-width: 100%; }
 .hero__names .amp {
   display: inline-block;
   font-style: italic;
-  color: var(--c-terracotta-text);
+  color: var(--c-terracotta);
   font-weight: 300;
   font-size: 0.68em;
   vertical-align: middle;
   margin: 0 0.15em;
-}
-
-.hero__date-row {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  width: 100%;
-  max-width: 520px;
-  margin-bottom: 0.6rem;
-}
-
-.hero__date-row .line {
-  flex: 1;
-  height: 1px;
-  background: var(--c-sand-border);
-}
-
-.hero__date {
-  font-family: var(--f-serif);
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--c-text-mid);
-  white-space: nowrap;
-}
-
-.hero__location {
-  font-family: var(--f-sans);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--c-text-muted);
-  margin-bottom: 3.5rem;
-}
-
-/* ── Hero venue cards ───────────────────────────────── */
-.hero-venues {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  max-width: 640px;
-  width: 100%;
-  margin: 0 auto 3.5rem;
-}
-
-.hero-venue-card {
-  background: var(--c-white);
-  border: 1px solid var(--c-sand-border);
-  padding: 1.75rem 1.5rem 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  transition: box-shadow 0.25s, transform 0.25s;
-}
-
-.hero-venue-card:hover {
-  box-shadow: 0 8px 32px rgba(17, 68, 119, 0.07);
-  transform: translateY(-3px);
-}
-
-.hero-venue-card__time {
-  font-family: var(--f-sans);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--c-terracotta-text);
-  margin-bottom: 0.2rem;
-}
-
-.hero-venue-card__title {
-  font-family: var(--f-serif);
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--c-blue);
-  line-height: 1.3;
-}
-
-.hero-venue-card__place {
-  font-family: var(--f-serif);
-  font-size: 0.9rem;
-  font-style: italic;
-  color: var(--c-text-mid);
-  margin-top: 0.1rem;
-}
-
-.hero-venue-card__address {
-  font-size: 0.78rem;
-  color: var(--c-text-muted);
-  line-height: 1.55;
-  margin-top: 0.3rem;
-}
-
-.hero-venue-card__footer {
-  font-size: 0.75rem;
-  color: var(--c-text-muted);
-  margin-top: 0.6rem;
-  line-height: 1.5;
-}
-
-.hero-venue-card__link {
-  color: var(--c-terracotta-text);
-  transition: opacity 0.2s;
-}
-.hero-venue-card__link:hover { opacity: 0.7; }
-
-@media (max-width: 540px) {
-  .hero-venues {
-    grid-template-columns: 1fr;
-    max-width: 340px;
-  }
 }
 
 /* ======================================================
@@ -545,7 +413,7 @@ img  { display: block; max-width: 100%; }
   font-family: var(--f-serif);
   font-size: 1.6rem;
   font-style: italic;
-  color: var(--c-terracotta-text);
+  color: var(--c-terracotta);
   margin-bottom: 3.75rem;
 }
 
@@ -568,18 +436,11 @@ img  { display: block; max-width: 100%; }
 .btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background: var(--c-terracotta);
-  color: var(--c-text);
+  background: var(--c-olive-pale);
+  color: var(--c-blue);
 }
 
-.btn--primary:hover { background: var(--c-terracotta-h); }
-
-.btn--jaune-beurre {
-  background: #F5DFA0;
-}
-.btn--jaune-beurre:hover {
-  background: #EFD589;
-}
+.btn--primary:hover { background: var(--c-olive); }
 
 .btn--outline {
   background: transparent;
@@ -589,7 +450,7 @@ img  { display: block; max-width: 100%; }
 
 .btn--outline:hover {
   background: var(--c-blue);
-  color: var(--c-white);
+  color: var(--c-cream);
 }
 
 /* ======================================================
@@ -599,6 +460,7 @@ img  { display: block; max-width: 100%; }
   padding: calc(var(--header-h) + 5rem) 2rem 5rem;
   text-align: center;
   position: relative;
+  background: linear-gradient(180deg, var(--c-champagne) 0%, var(--c-cream) 100%);
 }
 
 .page-banner::after {
@@ -609,7 +471,7 @@ img  { display: block; max-width: 100%; }
   transform: translateX(-50%);
   width: 60px;
   height: 1px;
-  background: var(--c-olive);
+  background: var(--c-terracotta);
   opacity: 0.5;
 }
 
@@ -618,7 +480,7 @@ img  { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--c-terracotta-text);
+  color: var(--c-terracotta);
   margin-bottom: 0.9rem;
 }
 
@@ -648,7 +510,7 @@ img  { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--c-terracotta-text);
+  color: var(--c-terracotta);
   margin-bottom: 0.75rem;
 }
 
@@ -752,7 +614,7 @@ img  { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--c-text-mid);
+  color: var(--c-blue);
   margin-bottom: 0.6rem;
 }
 
@@ -786,7 +648,7 @@ img  { display: block; max-width: 100%; }
 }
 
 .form-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C9270' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
@@ -854,14 +716,14 @@ img  { display: block; max-width: 100%; }
 .radio-option:has(input:checked),
 .checkbox-option:has(input:checked) {
   border-color: var(--c-olive);
-  background: rgba(85, 107, 47, 0.07);
+  background: rgba(161, 171, 91, 0.08);
   color: var(--c-olive);
 }
 
 .radio-option--absent:has(input:checked),
 .checkbox-option--absent:has(input:checked) {
   border-color: var(--c-text-muted);
-  background: rgba(158, 142, 120, 0.06);
+  background: rgba(140, 146, 112, 0.08);
   color: var(--c-text-muted);
 }
 
@@ -875,7 +737,8 @@ img  { display: block; max-width: 100%; }
    ====================================================== */
 .footer {
   padding: 3.5rem 2rem;
-  border-top: 1px solid var(--c-sand-border);
+  background: rgba(161, 171, 91, 0.08);
+  border-top: 1px solid rgba(149, 78, 42, 0.25);
   text-align: center;
 }
 
@@ -900,7 +763,7 @@ img  { display: block; max-width: 100%; }
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--c-text-muted);
+  color: var(--c-terracotta);
 }
 
 .footer__nav {
@@ -910,18 +773,18 @@ img  { display: block; max-width: 100%; }
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--c-text-muted);
+  color: var(--c-terracotta);
   margin-top: 0.25rem;
 }
 
 .footer__nav a { transition: color 0.2s; }
-.footer__nav a:hover { color: var(--c-terracotta-text); }
+.footer__nav a:hover { color: var(--c-olive); }
 .footer__nav .sep { color: var(--c-sand-border); }
 
 /* ======================================================
    Page d'accueil avec image de fond — lisibilité du texte
    (tout est scopé à body.hero-bg pour ne pas affecter
-   infos.html / rsvp.html, qui n'ont pas l'image de fond)
+   les autres pages, qui n'ont pas l'image de fond)
    ====================================================== */
 body.hero-bg {
   padding-top: 20px;
@@ -929,74 +792,66 @@ body.hero-bg {
 }
 
 body.hero-bg .header {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(38, 28, 20, 0.38);
 }
 body.hero-bg .header--scrolled {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(38, 28, 20, 0.58);
 }
 body.hero-bg .header__logo,
 body.hero-bg .nav__link {
-  color: var(--c-white);
+  color: var(--c-cream);
 }
-body.hero-bg .header__logo .logo-amp,
 body.hero-bg .nav__link:hover,
 body.hero-bg .nav__link.active {
-  color: var(--c-terracotta);
+  color: var(--c-champagne);
 }
 body.hero-bg .nav__toggle span {
-  background: var(--c-white);
+  background: var(--c-cream);
 }
 
 body.hero-bg .hero__content {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(38, 28, 20, 0.48);
   padding: 3rem 2rem;
   border-radius: 2px;
 }
-body.hero-bg .hero__eyebrow,
-body.hero-bg .hero__date {
-  color: rgba(255, 255, 255, 0.85);
+body.hero-bg .hero__subtitle {
+  color: rgba(253, 251, 240, 0.85);
 }
 body.hero-bg .hero__names {
-  color: var(--c-white);
+  color: var(--c-cream);
 }
 body.hero-bg .hero__names .amp {
-  color: var(--c-terracotta);
-}
-body.hero-bg .hero__date-row .line {
-  background: rgba(255, 255, 255, 0.3);
-}
-body.hero-bg .hero__location {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--c-champagne);
 }
 body.hero-bg .countdown__number {
-  color: var(--c-white);
+  color: var(--c-cream);
 }
 body.hero-bg .countdown__label {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(253, 251, 240, 0.7);
 }
 body.hero-bg .countdown__item + .countdown__item::before {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(253, 251, 240, 0.3);
 }
 body.hero-bg .countdown__done {
-  color: var(--c-terracotta);
+  color: var(--c-champagne);
 }
 
 body.hero-bg .footer {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(38, 28, 20, 0.48);
   border-top: none;
 }
 body.hero-bg .footer__names {
-  color: var(--c-white);
+  color: var(--c-cream);
 }
 body.hero-bg .footer__date,
 body.hero-bg .footer__nav {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(253, 251, 240, 0.75);
 }
 body.hero-bg .footer__nav a:hover {
-  color: var(--c-terracotta);
+  color: var(--c-champagne);
 }
 body.hero-bg .footer__nav .sep {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(253, 251, 240, 0.35);
 }
 
 /* ======================================================
@@ -1011,7 +866,7 @@ body.hero-bg .footer__nav .sep {
     position: fixed;
     top: var(--header-h);
     left: 0; right: 0;
-    background: rgba(245, 245, 220, 0.98);
+    background: rgba(253, 251, 240, 0.98);
     backdrop-filter: blur(8px);
     border-top: 1px solid var(--c-sand-border);
     padding: 2rem 2.5rem 2.5rem;
@@ -1041,16 +896,13 @@ body.hero-bg .footer__nav .sep {
   }
 
   /* Le menu mobile déroulant garde un fond clair (voir .nav ci-dessus) :
-     on y remet du texte foncé même sur la page d'accueil (body.hero-bg) */
+     on y remet le texte "normal" même sur la page d'accueil (body.hero-bg) */
   body.hero-bg .nav__link {
-    color: var(--c-text);
+    color: var(--c-blue);
   }
   body.hero-bg .nav__link:hover,
   body.hero-bg .nav__link.active {
-    color: var(--c-terracotta-text);
-  }
-  body.hero-bg .nav__link--cta {
-    color: var(--c-text) !important;
+    color: var(--c-olive);
   }
 
   .countdown__item { padding: 0 1.25rem; }
@@ -1139,7 +991,7 @@ body.hero-bg .footer__nav .sep {
 }
 
 /* ======================================================
-   Dress code — Polaroïds
+   Dress code / Galerie — Polaroïds
    ====================================================== */
 .gallery-title {
   font-family: var(--f-serif);
@@ -1149,6 +1001,10 @@ body.hero-bg .footer__nav .sep {
   color: var(--c-text-mid);
   text-align: center;
   margin-bottom: 0.5rem;
+}
+
+.gallery-section {
+  background: rgba(172, 209, 213, 0.22);
 }
 
 .polaroid-grid {
@@ -1238,77 +1094,6 @@ body.hero-bg .footer__nav .sep {
 }
 
 /* ======================================================
-   Tabs
-   ====================================================== */
-.page-banner--tabs {
-  padding-bottom: 3rem;
-}
-
-.page-banner--tabs::after {
-  display: none;
-}
-
-.tabs__nav {
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-  border-bottom: 1px solid var(--c-sand-border);
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 2.5rem;
-}
-
-.tabs__btn {
-  font-family: var(--f-sans);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--c-text-muted);
-  background: none;
-  border: none;
-  padding: 1.25rem 2rem 1.15rem;
-  cursor: pointer;
-  transition: color 0.25s;
-  white-space: nowrap;
-}
-
-.tabs__btn:hover    { color: var(--c-blue); }
-.tabs__btn.is-active { color: var(--c-blue); }
-
-.tabs__indicator {
-  position: absolute;
-  bottom: -1px;
-  height: 2px;
-  background: var(--c-olive);
-  transition:
-    left  0.35s cubic-bezier(0.25, 0, 0.25, 1),
-    width 0.35s cubic-bezier(0.25, 0, 0.25, 1);
-  pointer-events: none;
-}
-
-.tabs__panel { display: none; }
-
-.tabs__panel.is-active {
-  display: block;
-  animation: tabFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes tabFadeIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .tabs__nav { padding: 0 1.5rem; }
-  .tabs__btn { padding: 1rem 1.1rem 0.9rem; font-size: 0.62rem; letter-spacing: 0.14em; }
-}
-
-@media (max-width: 420px) {
-  .tabs__btn { padding: 0.9rem 0.7rem 0.8rem; font-size: 0.56rem; letter-spacing: 0.09em; }
-}
-
-/* ======================================================
    Accordion — FAQ
    ====================================================== */
 .accordion {
@@ -1342,9 +1127,9 @@ body.hero-bg .footer__nav .sep {
   transition: color 0.25s;
 }
 
-.accordion__btn:hover { color: var(--c-terracotta-text); }
+.accordion__btn:hover { color: var(--c-olive); }
 
-.accordion__btn[aria-expanded="true"] { color: var(--c-terracotta-text); }
+.accordion__btn[aria-expanded="true"] { color: var(--c-olive); }
 
 .accordion__icon {
   flex-shrink: 0;

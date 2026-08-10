@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dress code — Mariage de Séverine et Yasser">
+  <title>Dress Code — Séverine &amp; Yasser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header header--scrolled" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">yassev</a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li><a href="index.html"     class="nav__link">Accueil</a></li>
+          <li><a href="programme.html" class="nav__link">Programme</a></li>
+          <li><a href="dresscode.html" class="nav__link active" aria-current="page">Dress Code</a></li>
+          <li><a href="faq.html"       class="nav__link">FAQ</a></li>
+          <li><a href="rsvp.html"      class="nav__link nav__link--cta">Confirmez votre venue</a></li>
+        </ul>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle"
+              aria-label="Ouvrir le menu"
+              aria-expanded="false"
+              aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main>
+
+    <!-- Bandeau -->
+    <div class="page-banner">
+      <p class="page-banner__eyebrow">Séverine &amp; Yasser · 21 Juillet 2027</p>
+      <h1 class="page-banner__title">Dress Code</h1>
+    </div>
+
+    <div class="section">
+
+      <div class="polaroid-grid">
+
+        <div class="polaroid-wrapper" data-reveal="polaroid-l" style="--reveal-delay: 0s">
+          <p class="polaroid-label">Femmes</p>
+          <div class="polaroid polaroid--left">
+            <img src="femme.jpg" alt="Inspiration tenue femmes">
+          </div>
+        </div>
+
+        <div class="polaroid-wrapper" data-reveal="polaroid-r" style="--reveal-delay: 0.18s">
+          <p class="polaroid-label">Hommes</p>
+          <div class="polaroid polaroid--right">
+            <img src="images/homme.jpg" alt="Inspiration tenue hommes">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dresscode-text section__body" data-reveal>
+        <p>
+          Cette page est là pour vous donner des idées de tenues, uniquement à titre d'inspiration. Sinon, venez comme vous le souhaitez.
+        </p>
+        <p>
+          Petite précision tout de même&nbsp;: merci de ne pas porter de jaune, cette couleur est réservée à nos témoins (il faut pouvoir les repérer de loin…).
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__names">Séverine &amp; Yasser</p>
+      <p class="footer__date">21 Juillet 2027</p>
+      <nav class="footer__nav" aria-label="Navigation secondaire">
+        <a href="index.html">Accueil</a>
+        <span class="sep">·</span>
+        <a href="programme.html">Programme</a>
+        <span class="sep">·</span>
+        <a href="dresscode.html">Dress Code</a>
+        <span class="sep">·</span>
+        <a href="faq.html">FAQ</a>
+        <span class="sep">·</span>
+        <a href="rsvp.html">Confirmez votre venue</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

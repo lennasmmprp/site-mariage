@@ -12,18 +12,22 @@
 </head>
 <body class="hero-bg">
 
-  <img src="image site web.jpg.png" alt="" class="plein-ecran image-fond" aria-hidden="true">
+  <video class="plein-ecran image-fond" autoplay muted loop playsinline poster="image site web.jpg.png" aria-hidden="true">
+    <source src="vidéo couleur.mp4">
+  </video>
 
   <!-- ========== HEADER ========== -->
   <header class="header" id="header">
     <div class="header__inner">
-      <a href="index.html" class="header__logo">S <span class="logo-amp">&amp;</span> Y</a>
+      <a href="index.html" class="header__logo">yassev</a>
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <ul class="nav__list">
-          <li><a href="index.html"  class="nav__link active" aria-current="page">Accueil</a></li>
-          <li><a href="infos.html"  class="nav__link">Infos pratiques</a></li>
-          <li><a href="rsvp.html"   class="nav__link nav__link--cta">Confirmez votre venue</a></li>
+          <li><a href="index.html"     class="nav__link active" aria-current="page">Accueil</a></li>
+          <li><a href="programme.html" class="nav__link">Programme</a></li>
+          <li><a href="dresscode.html" class="nav__link">Dress Code</a></li>
+          <li><a href="faq.html"       class="nav__link">FAQ</a></li>
+          <li><a href="rsvp.html"      class="nav__link nav__link--cta">Confirmez votre venue</a></li>
         </ul>
       </nav>
 
@@ -41,56 +45,14 @@
     <section class="hero">
       <div class="hero__content">
 
-        <p class="hero__eyebrow">Vous êtes conviés à notre mariage</p>
-
-        <img src="images/olivier.jpg" alt="" class="hero__ornament" aria-hidden="true" style="mix-blend-mode: multiply; background: transparent;">
-
         <!-- À PERSONNALISER : prénoms des mariés -->
         <h1 class="hero__names">
           <span class="hero__name hero__name--l">Séverine</span>
-          <span class="amp">&amp;</span>
+          <span class="amp">et</span>
           <span class="hero__name hero__name--r">Yasser</span>
         </h1>
 
-        <div class="hero__date-row">
-          <span class="line"></span>
-          <!-- À PERSONNALISER : date du mariage -->
-          <p class="hero__date">Mercredi 21 Juillet 2027</p>
-          <span class="line"></span>
-        </div>
-
-        <!-- Cartes de lieux -->
-        <div class="hero-venues">
-
-          <div class="hero-venue-card">
-            <p class="hero-venue-card__time">13h00</p>
-            <p class="hero-venue-card__title">Cérémonie civile</p>
-            <p class="hero-venue-card__place">Mairie de Longjumeau</p>
-            <p class="hero-venue-card__address">6 bis Rue Léontine Sohier<br>91160 Longjumeau</p>
-            <p class="hero-venue-card__footer">
-              Parking disponible &nbsp;·&nbsp;
-              <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e5d877b1694e25:0xdaa2a3add6be272"
-                 target="_blank" rel="noopener" class="hero-venue-card__link">
-                Voir sur Google Maps →
-              </a>
-            </p>
-          </div>
-
-          <div class="hero-venue-card">
-            <p class="hero-venue-card__time">16h00</p>
-            <p class="hero-venue-card__title">Soirée &amp; Réception</p>
-            <p class="hero-venue-card__place">Domaine des Rois</p>
-            <p class="hero-venue-card__address">LA VENERIE, RD213<br>77830 Échouboulains</p>
-            <p class="hero-venue-card__footer">
-              Parking disponible &nbsp;·&nbsp;
-              <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47ef5b4dc95c3ab5:0x2cfeebf78aab0212"
-                 target="_blank" rel="noopener" class="hero-venue-card__link">
-                Voir sur Google Maps →
-              </a>
-            </p>
-          </div>
-
-        </div>
+        <p class="hero__subtitle">vous convient à leur mariage</p>
 
         <!-- Compte à rebours (mis à jour par js/main.js) -->
         <div class="countdown" id="countdown" aria-live="polite" aria-label="Compte à rebours">
@@ -112,7 +74,7 @@
           </div>
         </div>
 
-        <a href="rsvp.html" class="btn btn--primary btn--jaune-beurre">Répondre à l'invitation</a>
+        <a href="rsvp.html" class="btn btn--primary">Répondre à l'invitation</a>
 
       </div>
     </section>
@@ -126,7 +88,11 @@
       <nav class="footer__nav" aria-label="Navigation secondaire">
         <a href="index.html">Accueil</a>
         <span class="sep">·</span>
-        <a href="infos.html">Infos pratiques</a>
+        <a href="programme.html">Programme</a>
+        <span class="sep">·</span>
+        <a href="dresscode.html">Dress Code</a>
+        <span class="sep">·</span>
+        <a href="faq.html">FAQ</a>
         <span class="sep">·</span>
         <a href="rsvp.html">Confirmez votre venue</a>
       </nav>
