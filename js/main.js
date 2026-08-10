@@ -28,16 +28,28 @@
     heroVideo.playsInline  = true;
     heroVideo.autoplay     = true;
 
-    // L'image de secours est visible par défaut (voir HTML/CSS) et ne
-    // disparaît QUE lorsque la vidéo confirme réellement jouer — jamais
-    // sur la base d'une simple tentative de play().
-    const hideFallback = () => heroFallback.classList.add('is-hidden');
-    const showFallback = () => heroFallback.classList.remove('is-hidden');
+    // L'image de secours est visible par défaut (voir HTML/CSS) et la vidéo
+    // elle-même reste invisible (opacity:0, voir CSS) tant que la lecture
+    // n'est pas RÉELLEMENT confirmée — jamais sur la base d'une simple
+    // tentative de play(). Double protection : même si un navigateur
+    // affichait malgré tout un bouton natif sur la vidéo, il resterait
+    // invisible puisque l'élément entier l'est encore à ce moment-là.
+    const confirmPlaying = () => {
+      if (!heroVideo.paused && heroVideo.currentTime > 0 && heroVideo.readyState >= 2) {
+        heroVideo.classList.add('is-playing');
+        heroFallback.classList.add('is-hidden');
+      }
+    };
+    const revertToFallback = () => {
+      heroVideo.classList.remove('is-playing');
+      heroFallback.classList.remove('is-hidden');
+    };
 
-    heroVideo.addEventListener('playing', hideFallback);
-    heroVideo.addEventListener('pause',   showFallback);
-    heroVideo.addEventListener('stalled', showFallback);
-    heroVideo.addEventListener('error',   showFallback);
+    heroVideo.addEventListener('playing', confirmPlaying);
+    heroVideo.addEventListener('timeupdate', confirmPlaying);
+    heroVideo.addEventListener('pause',   revertToFallback);
+    heroVideo.addEventListener('stalled', revertToFallback);
+    heroVideo.addEventListener('error',   revertToFallback);
 
     const tryPlay = () => {
       const p = heroVideo.play();

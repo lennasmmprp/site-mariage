@@ -91,15 +91,28 @@ img  { display: block; max-width: 100%; }
 }
 
 /* Vidéo du hero : jamais de contrôles ni de bouton Play visibles,
-   même si le navigateur tente d'en afficher un par défaut */
+   même si le navigateur tente d'en afficher un par défaut.
+   Reste invisible (opacity:0) tant que la lecture n'est pas CONFIRMÉE
+   par JS (classe .is-playing) — même si iOS affichait malgré tout un
+   bouton natif sur l'élément vidéo lui-même, il resterait invisible
+   puisque tout l'élément l'est. L'image de secours en dessous assure
+   qu'il n'y a jamais d'écran noir entre-temps. */
 video.plein-ecran {
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+video.plein-ecran.is-playing {
+  opacity: 0.8;
 }
 video.plein-ecran::-webkit-media-controls,
 video.plein-ecran::-webkit-media-controls-start-playback-button,
-video.plein-ecran::-webkit-media-controls-play-button {
+video.plein-ecran::-webkit-media-controls-play-button,
+video.plein-ecran::-webkit-media-controls-overlay-play-button {
   display: none !important;
   -webkit-appearance: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Image de secours (1er visuel du hero) : visible par défaut, recouvre
