@@ -68,7 +68,7 @@ body {
 
 a    { color: inherit; text-decoration: none; }
 ul   { list-style: none; }
-img  { display: block; max-width: 100%; }
+img  { display: block; max-width: 100%; height: auto; }
 
 /* ======================================================
    Image de fond plein écran (page d'accueil)
@@ -290,16 +290,19 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 .hero__name--l {
   opacity: 0;
   animation: hSlideL 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  will-change: transform;
 }
 .hero__name--r {
   opacity: 0;
   animation: hSlideR 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  will-change: transform;
 }
 
 /* 2 — "et" : pop au centre */
 .hero__names .amp {
   opacity: 0;
   animation: hPop 0.75s cubic-bezier(0.34, 1.2, 0.64, 1) 0.9s forwards;
+  will-change: transform;
 }
 
 /* 3 — Sous-titre : fondu vers le haut, juste sous le titre */
@@ -308,11 +311,18 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   animation: hUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
 }
 
+/* 3bis — Date : juste après le sous-titre, juste avant le countdown */
+.hero__date {
+  opacity: 0;
+  animation: hUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
 /* 4 — Countdown : rebond en cascade */
 .hero .countdown        { opacity: 1; animation: none; }
 .hero .countdown__item  {
   opacity: 0;
   animation: hBounce 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  will-change: transform;
 }
 .hero .countdown__item:nth-child(1) { animation-delay: 1.7s; }
 .hero .countdown__item:nth-child(2) { animation-delay: 1.86s; }
@@ -323,6 +333,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 .hero .btn {
   opacity: 0;
   animation: hUp 1s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
+  will-change: transform;
 }
 
 /* ── Keyframes ─────────────────────────────────────── */
@@ -359,7 +370,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 
 /* Accessibilité — réduit les animations si l'utilisateur le demande */
 @media (prefers-reduced-motion: reduce) {
-  .hero__subtitle,
+  .hero__subtitle, .hero__date,
   .hero__name--l, .hero__name--r, .hero__names .amp,
   .hero .countdown__item, .hero .btn {
     animation-duration: 1ms !important;
@@ -377,6 +388,16 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   text-transform: uppercase;
   color: var(--c-text-muted);
   margin-top: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero__date {
+  font-family: var(--f-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
   margin-bottom: 1.75rem;
 }
 
@@ -887,6 +908,9 @@ body.hero-bg .hero__content {
 body.hero-bg .hero__subtitle {
   color: rgba(253, 251, 240, 0.85);
 }
+body.hero-bg .hero__date {
+  color: var(--c-champagne);
+}
 body.hero-bg .hero__names {
   color: var(--c-cream);
 }
@@ -1029,6 +1053,7 @@ body.hero-bg .footer__nav .sep {
   transition:
     opacity   0.7s ease        var(--reveal-delay, 0s),
     transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+  will-change: transform;
 }
 
 [data-reveal].is-visible {
@@ -1114,6 +1139,7 @@ body.hero-bg .footer__nav .sep {
     0 2px 6px  rgba(17, 68, 119, 0.05);
   width: 260px;
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  will-change: transform;
 }
 
 .polaroid--left  { transform: rotate(-2.5deg); }

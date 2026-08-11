@@ -18,7 +18,7 @@
   </video>
   <picture>
     <source srcset="frame_001.png" media="(max-width: 768px)">
-    <img id="hero-fallback" class="plein-ecran image-fond" src="image couv pc.png" alt="" aria-hidden="true">
+    <img id="hero-fallback" class="plein-ecran image-fond" src="image couv pc.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
   </picture>
 
   <!-- ========== HEADER ========== -->
@@ -58,6 +58,8 @@
         </h1>
 
         <p class="hero__subtitle">vous convient à leur mariage</p>
+
+        <p class="hero__date">21 Juillet 2027</p>
 
         <!-- Compte à rebours (mis à jour par js/main.js) -->
         <div class="countdown" id="countdown" aria-live="polite" aria-label="Compte à rebours">
