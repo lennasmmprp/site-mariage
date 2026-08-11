@@ -1159,6 +1159,19 @@ body.hero-bg .footer__nav .sep {
   display: block;
 }
 
+/* Variante sans marge — photo collée aux 4 bords du Polaroid (page Dress Code) */
+.polaroid--flush {
+  padding: 0;
+  height: 310px;
+}
+
+.polaroid--flush img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .dresscode-text {
   max-width: 560px;
   margin: 0 auto;
@@ -1179,6 +1192,8 @@ body.hero-bg .footer__nav .sep {
 
   .polaroid img { height: 260px; }
 
+  .polaroid--flush { height: 260px; }
+
   .timeline { max-width: 100%; }
 }
 
@@ -1189,6 +1204,11 @@ body.hero-bg .footer__nav .sep {
   }
 
   .polaroid img { height: 220px; }
+
+  .polaroid--flush {
+    padding: 0;
+    height: 220px;
+  }
 
   .polaroid-label { font-size: 1.6rem; }
 }
