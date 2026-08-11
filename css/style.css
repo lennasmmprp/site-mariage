@@ -201,15 +201,15 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 .nav__link.active::after { width: 100%; }
 
 .nav__link--cta {
-  background: var(--c-beurre);
-  color: var(--c-blue) !important;
+  background: var(--c-champagne);
+  color: var(--c-olive) !important;
   padding: 0.6rem 1.5rem;
   border-radius: 1px;
   transition: background 0.2s;
 }
 
 .nav__link--cta::after { display: none; }
-.nav__link--cta:hover { background: var(--c-beurre-h); }
+.nav__link--cta:hover { background: var(--c-champagne-h); }
 
 /* Mobile toggle */
 .nav__toggle {
@@ -393,12 +393,12 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 
 .hero__date {
   font-family: var(--f-sans);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--c-terracotta);
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
 
 .hero__names {
@@ -506,11 +506,11 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 .btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background: var(--c-beurre);
-  color: var(--c-blue);
+  background: var(--c-champagne);
+  color: var(--c-olive);
 }
 
-.btn--primary:hover { background: var(--c-beurre-h); }
+.btn--primary:hover { background: var(--c-champagne-h); }
 
 .btn--outline {
   background: transparent;
@@ -531,6 +531,14 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   text-align: center;
   position: relative;
   background: linear-gradient(180deg, var(--c-champagne) 0%, var(--c-cream) 100%);
+}
+
+/* Page Programme — fond uni, sans dégradé, texte en bleu pastel */
+.page-banner--programme {
+  background: var(--c-cream);
+}
+.page-banner--programme .page-banner__title {
+  color: var(--c-blue-pastel);
 }
 
 .page-banner::after {
@@ -588,7 +596,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   font-family: var(--f-title);
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-blue-pastel);
   margin-bottom: 2rem;
   line-height: 1.15;
 }
@@ -652,7 +660,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-blue-pastel);
   letter-spacing: 0.01em;
 }
 
@@ -674,15 +682,15 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--c-blue);
-  border: 1px solid var(--c-blue);
+  color: var(--c-blue-pastel);
+  border: 1px solid var(--c-blue-pastel);
   padding: 0.5rem 1.1rem;
   margin-top: 0.7rem;
   transition: background 0.2s, color 0.2s;
 }
 
 .timeline__map-link:hover {
-  background: var(--c-blue);
+  background: var(--c-blue-pastel);
   color: var(--c-cream);
 }
 
