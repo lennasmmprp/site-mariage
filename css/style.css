@@ -162,9 +162,23 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   letter-spacing: 0.1em;
   color: var(--c-blue);
   transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .header__logo:hover { opacity: 0.75; }
+
+.header__logo-img {
+  display: block;
+  height: 38px;
+  width: auto;
+}
+
+/* Page d'accueil — header sur fond sombre, logo inversé en blanc
+   pour rester lisible (comme le texte de nav dans ce contexte) */
+body.hero-bg .header__logo-img {
+  filter: brightness(0) invert(1);
+}
 
 .nav__list {
   display: flex;
@@ -637,30 +651,32 @@ body.flat-bg .header--scrolled {
   margin: 2rem auto 0;
 }
 
-/* Programme, Dress Code, FAQ — espace réduit entre l'olivier et le
-   début du contenu (timeline / polaroïds / accordéon) */
+/* Programme, Dress Code, FAQ, RSVP — espace réduit entre l'olivier et
+   le début du contenu (timeline / polaroïds / accordéon / formulaire) */
 .page-banner--programme,
 .page-banner--dresscode,
-.page-banner--faq {
-  padding-bottom: 0.5rem;
+.page-banner--faq,
+.page-banner--rsvp {
+  padding-bottom: 0.25rem;
 }
 
 .page-banner--programme + .section,
 .page-banner--dresscode + .section,
-.page-banner--faq + .section {
-  padding-top: 0.5rem;
+.page-banner--faq + .section,
+.page-banner--rsvp + .rsvp-section {
+  padding-top: 0.25rem;
 }
 
 .page-banner--programme + .section .timeline {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .page-banner--dresscode + .section .polaroid-grid {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .page-banner--faq + .section .accordion {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .page-banner__eyebrow {
