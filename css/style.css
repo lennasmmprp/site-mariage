@@ -545,15 +545,17 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 }
 
 /* Titre "Programme de la journée" — tenu sur une seule ligne, même
-   police/taille/couleur/style sur tout le titre (voir .page-banner__title) */
-.page-banner__title--programme {
+   police/taille/couleur/style sur tout le titre (voir .page-banner__title).
+   Sélecteur à 2 classes pour primer sur .page-banner__title (même
+   spécificité sinon, et .page-banner__title est déclaré plus bas). */
+.page-banner__title--programme.page-banner__title {
   white-space: nowrap;
   font-size: clamp(1.35rem, 6vw, 5rem);
 }
 
 /* Mobile — titre plus petit pour respirer par rapport aux bords du bandeau */
 @media (max-width: 768px) {
-  .page-banner__title--programme {
+  .page-banner__title--programme.page-banner__title {
     font-size: clamp(1.1rem, 5vw, 2.2rem);
   }
 }
