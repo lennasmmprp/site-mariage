@@ -625,6 +625,20 @@ body.flat-bg .header--scrolled {
   margin: 2rem auto 0;
 }
 
+/* Page Programme — espace réduit entre l'olivier et le premier
+   horaire de la timeline (uniquement sur cette page) */
+.page-banner--programme {
+  padding-bottom: 2rem;
+}
+
+.page-banner--programme + .section {
+  padding-top: 2rem;
+}
+
+.page-banner--programme + .section .timeline {
+  margin-top: 1rem;
+}
+
 .page-banner__eyebrow {
   font-size: 0.68rem;
   font-weight: 500;
