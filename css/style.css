@@ -533,20 +533,12 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   background: linear-gradient(180deg, var(--c-champagne) 0%, var(--c-cream) 100%);
 }
 
-/* Programme, Dress Code — fond jaune beurre uni #F3E9B5, sans dégradé */
+/* Programme, Dress Code, FAQ, RSVP — fond jaune beurre uni #F5DFA0, sans dégradé, identique partout */
 .page-banner--programme,
-.page-banner--dresscode {
-  background: var(--c-champagne);
-}
-
-/* FAQ — fond jaune beurre uni (teinte distincte déjà validée), sans dégradé */
-.page-banner--faq {
-  background: var(--c-beurre);
-}
-
-/* Confirmer votre venue — fond jaune beurre uni #F3E9B5, sans dégradé */
+.page-banner--dresscode,
+.page-banner--faq,
 .page-banner--rsvp {
-  background: var(--c-champagne);
+  background: var(--c-beurre);
 }
 .page-banner--programme .page-banner__title {
   color: var(--c-blue-pastel);
