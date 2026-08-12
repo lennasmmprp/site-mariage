@@ -533,9 +533,11 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   background: linear-gradient(180deg, var(--c-champagne) 0%, var(--c-cream) 100%);
 }
 
-/* Page Programme — fond uni, sans dégradé, texte en bleu pastel */
-.page-banner--programme {
-  background: var(--c-cream);
+/* Pages Programme, Dress Code, FAQ — fond jaune beurre uni, sans dégradé */
+.page-banner--programme,
+.page-banner--dresscode,
+.page-banner--faq {
+  background: var(--c-beurre);
 }
 .page-banner--programme .page-banner__title {
   color: var(--c-blue-pastel);
@@ -551,6 +553,33 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   height: 1px;
   background: var(--c-terracotta);
   opacity: 0.5;
+}
+
+/* Programme, Dress Code, FAQ — la ligne de séparation est remplacée
+   par la branche d'olivier déjà utilisée sur le site */
+.page-banner--programme::after,
+.page-banner--dresscode::after,
+.page-banner--faq::after {
+  display: none;
+}
+
+.page-banner__subtitle {
+  font-family: var(--f-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--c-text-muted);
+  letter-spacing: 0.03em;
+  margin-top: 0.4rem;
+}
+
+.page-banner__olive {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: auto;
 }
 
 .page-banner__eyebrow {
@@ -1054,6 +1083,14 @@ body.hero-bg .footer__nav .sep {
 
 .page-banner .page-banner__title {
   animation: bannerIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.page-banner .page-banner__subtitle {
+  animation: bannerIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.page-banner .page-banner__olive {
+  animation: bannerIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
 }
 
 /* Parallaxe sur le bandeau (valeur injectée par JS via --px) */
