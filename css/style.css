@@ -544,6 +544,23 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   color: var(--c-blue-pastel);
 }
 
+/* Programme, Dress Code, FAQ — fond de page 100% uniforme #F3E9B5,
+   sans dégradé ni fond crème/beige, du bandeau jusqu'au footer
+   (scopé à body.flat-bg pour ne pas affecter les autres pages) */
+body.flat-bg {
+  background: #F3E9B5;
+}
+body.flat-bg .page-banner,
+body.flat-bg .section,
+body.flat-bg .footer {
+  background: #F3E9B5;
+}
+body.flat-bg .header--scrolled {
+  background: #F3E9B5;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 .page-banner::after {
   content: '';
   position: absolute;
