@@ -544,6 +544,13 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   color: var(--c-blue-pastel);
 }
 
+/* Titre "Programme de la journée" — tenu sur une seule ligne, même
+   police/taille/couleur/style sur tout le titre (voir .page-banner__title) */
+.page-banner__title--programme {
+  white-space: nowrap;
+  font-size: clamp(1.35rem, 6vw, 5rem);
+}
+
 /* Programme, Dress Code, FAQ — fond de page 100% uniforme #F3E9B5,
    sans dégradé ni fond crème/beige, du bandeau jusqu'au footer
    (scopé à body.flat-bg pour ne pas affecter les autres pages) */
