@@ -613,7 +613,7 @@ body.flat-bg .header--scrolled {
 
 .page-banner__olive {
   display: block;
-  height: 80px;
+  height: 112px;
   width: auto;
   margin: 1.5rem auto 0;
   background: none;
@@ -633,7 +633,7 @@ body.flat-bg .header--scrolled {
 }
 
 .page-banner--programme .page-banner__olive {
-  height: 104px;
+  height: 144px;
   margin: 2rem auto 0;
 }
 
