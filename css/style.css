@@ -587,11 +587,12 @@ body.flat-bg .header--scrolled {
   opacity: 0.5;
 }
 
-/* Programme, Dress Code, FAQ — la ligne de séparation est remplacée
+/* Programme, Dress Code, FAQ, RSVP — la ligne de séparation est remplacée
    par la branche d'olivier déjà utilisée sur le site */
 .page-banner--programme::after,
 .page-banner--dresscode::after,
-.page-banner--faq::after {
+.page-banner--faq::after,
+.page-banner--rsvp::after {
   display: none;
 }
 
@@ -632,18 +633,30 @@ body.flat-bg .header--scrolled {
   margin: 2rem auto 0;
 }
 
-/* Page Programme — espace réduit entre l'olivier et le premier
-   horaire de la timeline (uniquement sur cette page) */
-.page-banner--programme {
-  padding-bottom: 2rem;
+/* Programme, Dress Code, FAQ — espace réduit entre l'olivier et le
+   début du contenu (timeline / polaroïds / accordéon) */
+.page-banner--programme,
+.page-banner--dresscode,
+.page-banner--faq {
+  padding-bottom: 0.5rem;
 }
 
-.page-banner--programme + .section {
-  padding-top: 2rem;
+.page-banner--programme + .section,
+.page-banner--dresscode + .section,
+.page-banner--faq + .section {
+  padding-top: 0.5rem;
 }
 
 .page-banner--programme + .section .timeline {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.page-banner--dresscode + .section .polaroid-grid {
+  margin-top: 0.5rem;
+}
+
+.page-banner--faq + .section .accordion {
+  margin-top: 0.5rem;
 }
 
 .page-banner__eyebrow {
