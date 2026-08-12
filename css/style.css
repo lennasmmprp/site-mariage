@@ -551,6 +551,13 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   font-size: clamp(1.35rem, 6vw, 5rem);
 }
 
+/* Mobile — titre plus petit pour respirer par rapport aux bords du bandeau */
+@media (max-width: 768px) {
+  .page-banner__title--programme {
+    font-size: clamp(1.1rem, 5vw, 2.2rem);
+  }
+}
+
 /* Programme, Dress Code, FAQ — fond de page 100% uniforme #F3E9B5,
    sans dégradé ni fond crème/beige, du bandeau jusqu'au footer
    (scopé à body.flat-bg pour ne pas affecter les autres pages) */
