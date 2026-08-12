@@ -533,11 +533,20 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   background: linear-gradient(180deg, var(--c-champagne) 0%, var(--c-cream) 100%);
 }
 
-/* Pages Programme, Dress Code, FAQ — fond jaune beurre uni, sans dégradé */
+/* Programme, Dress Code — fond jaune beurre uni #F3E9B5, sans dégradé */
 .page-banner--programme,
-.page-banner--dresscode,
+.page-banner--dresscode {
+  background: var(--c-champagne);
+}
+
+/* FAQ — fond jaune beurre uni (teinte distincte déjà validée), sans dégradé */
 .page-banner--faq {
   background: var(--c-beurre);
+}
+
+/* Confirmer votre venue — fond jaune beurre uni #F3E9B5, sans dégradé */
+.page-banner--rsvp {
+  background: var(--c-champagne);
 }
 .page-banner--programme .page-banner__title {
   color: var(--c-blue-pastel);
@@ -564,7 +573,8 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 }
 
 .page-banner__subtitle {
-  font-family: var(--f-serif);
+  /* Même police que la date de l'accueil (.hero__date) */
+  font-family: var(--f-sans);
   font-size: 1.05rem;
   font-style: italic;
   font-weight: 400;
@@ -574,12 +584,29 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 }
 
 .page-banner__olive {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: auto;
+  display: block;
+  height: 80px;
+  width: auto;
+  margin: 1.5rem auto 0;
+  background: none;
+  opacity: 0.6;
+  /* Le fichier source a un léger matte blanc sur ses bords semi-transparents ;
+     multiply le fait disparaître dans le fond de la page sans retoucher l'image */
+  mix-blend-mode: multiply;
+}
+
+/* Page Programme — olivier centré horizontalement et verticalement
+   dans le bandeau, légèrement plus grand qu'ailleurs sur le site */
+.page-banner--programme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-banner--programme .page-banner__olive {
+  height: 104px;
+  margin: 2rem auto 0;
 }
 
 .page-banner__eyebrow {
@@ -1089,8 +1116,13 @@ body.hero-bg .footer__nav .sep {
   animation: bannerIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
+@keyframes bannerInOlive {
+  from { opacity: 0;   transform: translateY(20px); }
+  to   { opacity: 0.6; transform: translateY(0); }
+}
+
 .page-banner .page-banner__olive {
-  animation: bannerIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+  animation: bannerInOlive 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
 }
 
 /* Parallaxe sur le bandeau (valeur injectée par JS via --px) */
