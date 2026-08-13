@@ -304,6 +304,65 @@
     reader.readAsDataURL(file);
   });
 
+  // Redimensionne et recompresse la photo côté navigateur avant l'envoi
+  // (les photos de téléphone pèsent souvent 5 à 12 Mo) — accélère
+  // nettement l'envoi sans perte visible à l'écran. Repli silencieux
+  // sur le fichier d'origine si la compression échoue ou n'apporte rien
+  // (GIF animés, images déjà petites, format non décodable…).
+  const PHOTO_MAX_DIMENSION = 1920;
+  const PHOTO_JPEG_QUALITY  = 0.82;
+
+  const compressImage = file => new Promise((resolve) => {
+    const original = { blob: file, filename: file.name, mimeType: file.type || 'image/jpeg' };
+
+    if (file.type === 'image/gif') {
+      resolve(original);
+      return;
+    }
+
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width, height } = img;
+
+      if (width > PHOTO_MAX_DIMENSION || height > PHOTO_MAX_DIMENSION) {
+        if (width > height) {
+          height = Math.round(height * (PHOTO_MAX_DIMENSION / width));
+          width  = PHOTO_MAX_DIMENSION;
+        } else {
+          width  = Math.round(width * (PHOTO_MAX_DIMENSION / height));
+          height = PHOTO_MAX_DIMENSION;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width  = width;
+      canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(blob => {
+        if (blob && blob.size < file.size) {
+          resolve({
+            blob,
+            filename: file.name.replace(/\.[^.]+$/, '') + '.jpg',
+            mimeType: 'image/jpeg',
+          });
+        } else {
+          resolve(original);
+        }
+      }, 'image/jpeg', PHOTO_JPEG_QUALITY);
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      resolve(original);
+    };
+
+    img.src = url;
+  });
+
   if (photoForm && photoInput) {
     // Fichiers retenus, chacun avec son URL de prévisualisation locale
     // (indépendant de photoInput.files, pour permettre d'en retirer un
@@ -460,24 +519,27 @@
       }
 
       photoStatus.style.display = 'none';
-      photoSubmit.textContent   = 'Envoi en cours…';
-      photoSubmit.disabled      = true;
+      const total = selectedPhotos.length;
+      let completed = 0;
+      photoSubmit.textContent = total > 1 ? `Envoi en cours… (0/${total})` : 'Envoi en cours…';
+      photoSubmit.disabled    = true;
 
       try {
-        for (const entry of selectedPhotos) {
-          const base64 = await fileToBase64(entry.file);
-          // mode: 'no-cors' : la réponse est opaque mais le fichier
-          // arrive bien dans le dossier Drive (même principe que le RSVP).
+        // Compression + envoi en parallèle (beaucoup plus rapide que
+        // photo par photo, surtout à plusieurs) ; mode: 'no-cors' :
+        // la réponse est opaque mais le fichier arrive bien dans le
+        // dossier Drive (même principe que le RSVP).
+        await Promise.all(selectedPhotos.map(async (entry) => {
+          const { blob, filename, mimeType } = await compressImage(entry.file);
+          const base64 = await fileToBase64(blob);
           await fetch(PHOTOS_UPLOAD_URL, {
             method: 'POST',
             mode:   'no-cors',
-            body: JSON.stringify({
-              filename: entry.file.name,
-              mimeType: entry.file.type || 'image/jpeg',
-              data:     base64,
-            }),
+            body: JSON.stringify({ filename, mimeType, data: base64 }),
           });
-        }
+          completed++;
+          photoSubmit.textContent = total > 1 ? `Envoi en cours… (${completed}/${total})` : 'Envoi en cours…';
+        }));
 
         selectedPhotos.forEach(entry => URL.revokeObjectURL(entry.url));
         selectedPhotos = [];
