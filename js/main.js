@@ -281,12 +281,21 @@
   /* =====================================================
      Partage de photos — envoi vers Google Drive
      ===================================================== */
-  const photoForm     = document.getElementById('photo-form');
-  const photoInput    = document.getElementById('photo-input');
-  const photoPreviews = document.getElementById('photo-previews');
-  const photoSubmit   = document.getElementById('photo-submit');
-  const photoStatus   = document.getElementById('photo-status');
-  const photoSuccess  = document.getElementById('photo-success');
+  const photoForm      = document.getElementById('photo-form');
+  const photoInput     = document.getElementById('photo-input');
+  const photoPreviews  = document.getElementById('photo-previews');
+  const photoSubmit    = document.getElementById('photo-submit');
+  const photoStatus    = document.getElementById('photo-status');
+  const photoSuccess   = document.getElementById('photo-success');
+  const photoBulkBar   = document.getElementById('photo-bulk-bar');
+  const photoBulkCount = document.getElementById('photo-bulk-count');
+  const photoBulkBtn   = document.getElementById('photo-bulk-remove');
+
+  const lightbox      = document.getElementById('photo-lightbox');
+  const lightboxImage  = document.getElementById('lightbox-image');
+  const lightboxClose  = document.getElementById('lightbox-close');
+  const lightboxPrev   = document.getElementById('lightbox-prev');
+  const lightboxNext   = document.getElementById('lightbox-next');
 
   const fileToBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -301,6 +310,54 @@
     // sans perdre les autres — le navigateur ne permet pas de modifier
     // une FileList existante).
     let selectedPhotos = [];
+    let lightboxIndex  = 0;
+
+    const updateBulkBar = () => {
+      const count = selectedPhotos.filter(entry => entry.selected).length;
+      photoBulkBar.hidden   = count === 0;
+      photoBulkCount.textContent = count > 1 ? `${count} photos sélectionnées` : `${count} photo sélectionnée`;
+    };
+
+    const openLightbox = (index) => {
+      lightboxIndex = index;
+      updateLightboxImage();
+      lightbox.classList.add('lightbox--open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('lightbox--open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    function updateLightboxImage() {
+      if (!selectedPhotos.length) {
+        closeLightbox();
+        return;
+      }
+      lightboxIndex = (lightboxIndex + selectedPhotos.length) % selectedPhotos.length;
+      const entry = selectedPhotos[lightboxIndex];
+      lightboxImage.src = entry.url;
+      lightboxImage.alt = entry.file.name;
+      const multiple = selectedPhotos.length > 1;
+      lightboxPrev.hidden = !multiple;
+      lightboxNext.hidden = !multiple;
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => { lightboxIndex--; updateLightboxImage(); });
+    lightboxNext.addEventListener('click', () => { lightboxIndex++; updateLightboxImage(); });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('lightbox--open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  { lightboxIndex--; updateLightboxImage(); }
+      if (e.key === 'ArrowRight') { lightboxIndex++; updateLightboxImage(); }
+    });
 
     const renderPreviews = () => {
       photoPreviews.innerHTML = '';
@@ -309,11 +366,36 @@
         const card = document.createElement('div');
         card.className = 'photo-upload__preview';
 
+        // Sélection multiple (case à cocher)
+        const selectLabel = document.createElement('label');
+        selectLabel.className = 'photo-upload__preview-select';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = !!entry.selected;
+        checkbox.setAttribute('aria-label', `Sélectionner ${entry.file.name}`);
+        checkbox.addEventListener('change', () => {
+          entry.selected = checkbox.checked;
+          updateBulkBar();
+        });
+        const checkmark = document.createElement('span');
+        checkmark.className = 'photo-upload__preview-checkmark';
+        selectLabel.appendChild(checkbox);
+        selectLabel.appendChild(checkmark);
+        card.appendChild(selectLabel);
+
+        // Clic sur la photo = agrandissement
+        const openBtn = document.createElement('button');
+        openBtn.type = 'button';
+        openBtn.className = 'photo-upload__preview-open';
+        openBtn.setAttribute('aria-label', `Agrandir ${entry.file.name}`);
         const img = document.createElement('img');
         img.src = entry.url;
         img.alt = '';
-        card.appendChild(img);
+        openBtn.appendChild(img);
+        openBtn.addEventListener('click', () => openLightbox(index));
+        card.appendChild(openBtn);
 
+        // Retrait individuel
         const removeBtn = document.createElement('button');
         removeBtn.type = 'button';
         removeBtn.className = 'photo-upload__preview-remove';
@@ -323,12 +405,24 @@
           URL.revokeObjectURL(entry.url);
           selectedPhotos.splice(index, 1);
           renderPreviews();
+          updateBulkBar();
+          if (lightbox.classList.contains('lightbox--open')) updateLightboxImage();
         });
         card.appendChild(removeBtn);
 
         photoPreviews.appendChild(card);
       });
     };
+
+    photoBulkBtn.addEventListener('click', () => {
+      selectedPhotos = selectedPhotos.filter(entry => {
+        if (entry.selected) URL.revokeObjectURL(entry.url);
+        return !entry.selected;
+      });
+      renderPreviews();
+      updateBulkBar();
+      if (lightbox.classList.contains('lightbox--open')) updateLightboxImage();
+    });
 
     photoInput.addEventListener('change', () => {
       const newFiles = [...photoInput.files];
@@ -346,7 +440,7 @@
           entry.file.lastModified === file.lastModified
         );
         if (!alreadyAdded) {
-          selectedPhotos.push({ file, url: URL.createObjectURL(file) });
+          selectedPhotos.push({ file, url: URL.createObjectURL(file), selected: false });
         }
       });
 
@@ -387,6 +481,7 @@
 
         selectedPhotos.forEach(entry => URL.revokeObjectURL(entry.url));
         selectedPhotos = [];
+        closeLightbox();
 
         photoForm.style.display    = 'none';
         photoSuccess.style.display = 'block';

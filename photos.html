@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=14">
+  <link rel="stylesheet" href="css/style.css?v=15">
   <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body class="flat-bg">
@@ -71,6 +71,11 @@
             class="photo-upload__input"
           >
 
+          <div id="photo-bulk-bar" class="photo-upload__bulk-bar" hidden>
+            <span id="photo-bulk-count"></span>
+            <button type="button" id="photo-bulk-remove" class="photo-upload__bulk-remove">Retirer la sélection</button>
+          </div>
+
           <div id="photo-previews" class="photo-upload__previews"></div>
 
           <p id="photo-status" class="photo-upload__status"></p>
@@ -84,6 +89,14 @@
     </div>
 
   </main>
+
+  <!-- ========== LIGHTBOX (agrandissement des photos) ========== -->
+  <div id="photo-lightbox" class="lightbox" aria-hidden="true">
+    <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Fermer">×</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Photo précédente">‹</button>
+    <img class="lightbox__image" id="lightbox-image" src="" alt="">
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Photo suivante">›</button>
+  </div>
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
@@ -106,6 +119,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
