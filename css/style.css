@@ -416,7 +416,7 @@ body.hero-bg .header__logo-img {
   color: var(--c-olive);
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 .hero__names {
@@ -450,7 +450,7 @@ body.hero-bg .header__logo-img {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 40px;
+  margin-top: 5px;
   margin-bottom: 3.75rem;
   width: 100%;
 }
@@ -562,6 +562,12 @@ body.hero-bg .header__logo-img {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+}
+
+/* Confirmez votre venue — recadrage pour cadrer davantage sur le
+   couple et moins sur la nature en haut de l'image */
+.page-hero__bg--rsvp {
+  object-position: center 70%;
 }
 
 .page-hero::after {
