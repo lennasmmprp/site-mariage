@@ -220,7 +220,7 @@ body.hero-bg .header__logo-img {
   background: var(--c-champagne);
   color: var(--c-olive) !important;
   padding: 0.6rem 1.5rem;
-  border-radius: 1px;
+  border-radius: 0;
   transition: background 0.2s;
 }
 
@@ -655,19 +655,19 @@ body:has(.page-hero) .header:not(.header--scrolled) .nav__toggle span {
   }
 }
 
-/* Programme, Dress Code, FAQ — fond de page 100% uniforme #F6EEC6 (jaune beurre légèrement plus clair),
-   sans dégradé ni fond crème/beige, du bandeau jusqu'au footer
-   (scopé à body.flat-bg pour ne pas affecter les autres pages) */
+/* Programme, Dress Code, FAQ, RSVP, Photos — fond blanc uniforme, sans
+   dégradé ni fond crème/beige, du bandeau jusqu'au footer (scopé à
+   body.flat-bg pour ne pas affecter les autres pages). Le jaune beurre
+   est réservé au footer uniquement (voir règle .footer de base). */
 body.flat-bg {
-  background: #F6EEC6;
+  background: #FFFFFF;
 }
 body.flat-bg .page-banner,
 body.flat-bg .section {
-  background: #F6EEC6;
+  background: #FFFFFF;
 }
-/* Le footer garde sa propre couleur #F3E9B5 (voir règle .footer de base) */
 body.flat-bg .header--scrolled {
-  background: #F6EEC6;
+  background: #FFFFFF;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -873,7 +873,7 @@ body.flat-bg .header--scrolled {
   align-items: center;
   gap: 0.5rem;
   background: #ACD1D5;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 0.55rem 1rem;
   font-family: var(--f-serif);
   font-size: 1.1rem;
@@ -920,14 +920,6 @@ body.flat-bg .header--scrolled {
   color: var(--c-cream);
 }
 
-/* Programme — étapes avec changement de lieu (Cérémonie civile,
-   Shooting au Domaine des Rois) : liseré + repère visuel discrets
-   pour signaler immédiatement qu'il s'agit d'un lieu différent */
-.timeline__item--venue {
-  padding-left: 1.1rem;
-  border-left: 2px solid var(--c-olive);
-}
-
 .timeline__item--venue .timeline__heading::before {
   content: '';
   flex-shrink: 0;
@@ -969,7 +961,7 @@ body.flat-bg .header--scrolled {
   color: var(--c-text);
   background: var(--c-white);
   border: 1px solid var(--c-sand-border);
-  border-radius: 1px;
+  border-radius: 0;
   padding: 0.85rem 1rem;
   outline: none;
   transition: border-color 0.2s;
@@ -1041,7 +1033,7 @@ body.flat-bg .header--scrolled {
   color: var(--c-text-mid);
   padding: 0.6rem 1.1rem;
   border: 1px solid var(--c-sand-border);
-  border-radius: 1px;
+  border-radius: 0;
   transition: border-color 0.2s, background 0.2s;
   user-select: none;
 }
@@ -1111,7 +1103,7 @@ body.flat-bg .header--scrolled {
 .photo-upload__preview {
   position: relative;
   aspect-ratio: 1 / 1;
-  border-radius: 6px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--c-sand-border);
   box-shadow: 0 2px 8px rgba(17, 68, 119, 0.08);
@@ -1214,7 +1206,7 @@ body.flat-bg .header--scrolled {
   color: var(--c-olive);
   background: none;
   border: 1px solid var(--c-olive);
-  border-radius: 1px;
+  border-radius: 0;
   padding: 0.4rem 0.9rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -1344,7 +1336,7 @@ body.hero-bg .nav__toggle span {
 body.hero-bg .hero__content {
   background: rgba(38, 28, 20, 0.48);
   padding: 3rem 2rem;
-  border-radius: 2px;
+  border-radius: 0;
 }
 body.hero-bg .hero__subtitle {
   color: rgba(253, 251, 240, 0.85);

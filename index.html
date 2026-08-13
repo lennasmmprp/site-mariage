@@ -8,17 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=22">
+  <link rel="stylesheet" href="css/style.css?v=23">
+  <link rel="preload" as="image" href="image couv pc.jpg" fetchpriority="high">
   <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body class="hero-bg">
 
   <video id="hero-video" class="plein-ecran" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noremoteplayback noplaybackrate" tabindex="-1" aria-hidden="true">
-    <source src="vidéo mobile .mp4" type="video/mp4" media="(max-width: 768px)">
     <source src="vidéo couleur.mp4" type="video/mp4">
   </video>
   <picture>
-    <img id="hero-fallback" class="plein-ecran image-fond" src="image couv pc.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img id="hero-fallback" class="plein-ecran image-fond" src="image couv pc.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
   </picture>
 
   <!-- ========== HEADER ========== -->
@@ -96,6 +96,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
