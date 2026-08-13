@@ -160,7 +160,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
   font-size: 1.55rem;
   font-weight: 500;
   letter-spacing: 0.1em;
-  color: var(--c-blue);
+  color: var(--c-olive);
   transition: opacity 0.2s;
   display: flex;
   align-items: center;
@@ -192,7 +192,7 @@ body.hero-bg .header__logo-img {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--c-blue);
+  color: var(--c-olive);
   position: relative;
   transition: color 0.2s;
 }
@@ -240,7 +240,7 @@ body.hero-bg .header__logo-img {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: var(--c-blue);
+  background: var(--c-olive);
   transition: transform 0.3s, opacity 0.3s;
   transform-origin: center;
 }
@@ -420,7 +420,7 @@ body.hero-bg .header__logo-img {
   font-size: clamp(2rem, 7.5vw, 4.75rem);
   font-weight: 400;
   line-height: 1.15;
-  color: var(--c-blue);
+  color: var(--c-olive);
   letter-spacing: -0.01em;
 }
 
@@ -431,7 +431,7 @@ body.hero-bg .header__logo-img {
 .hero__names .amp {
   display: inline-block;
   font-style: italic;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   font-weight: 300;
   font-size: 0.68em;
   vertical-align: middle;
@@ -475,7 +475,7 @@ body.hero-bg .header__logo-img {
   font-size: clamp(1.3rem, 7vw, 4.2rem);
   font-weight: 300;
   line-height: 1;
-  color: var(--c-blue);
+  color: var(--c-olive);
   letter-spacing: -0.02em;
   min-width: 2ch;
   text-align: center;
@@ -497,7 +497,7 @@ body.hero-bg .header__logo-img {
   font-family: var(--f-serif);
   font-size: 1.6rem;
   font-style: italic;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   margin-bottom: 3.75rem;
 }
 
@@ -528,12 +528,12 @@ body.hero-bg .header__logo-img {
 
 .btn--outline {
   background: transparent;
-  color: var(--c-blue);
-  border: 1px solid var(--c-blue);
+  color: var(--c-olive);
+  border: 1px solid var(--c-olive);
 }
 
 .btn--outline:hover {
-  background: var(--c-blue);
+  background: var(--c-olive);
   color: var(--c-cream);
 }
 
@@ -556,7 +556,7 @@ body.hero-bg .header__logo-img {
   background: var(--c-beurre);
 }
 .page-banner--programme .page-banner__title {
-  color: var(--c-blue-pastel);
+  color: var(--c-olive);
 }
 
 /* Titre "Programme de la journée" — tenu sur une seule ligne, même
@@ -602,7 +602,7 @@ body.flat-bg .header--scrolled {
   transform: translateX(-50%);
   width: 60px;
   height: 1px;
-  background: var(--c-terracotta);
+  background: var(--c-olive);
   opacity: 0.5;
 }
 
@@ -692,7 +692,7 @@ body.flat-bg .header--scrolled {
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   margin-bottom: 0.9rem;
 }
 
@@ -700,7 +700,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-title);
   font-size: clamp(2.75rem, 7vw, 5rem);
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-olive);
   line-height: 1.1;
 }
 
@@ -722,7 +722,7 @@ body.flat-bg .header--scrolled {
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   margin-bottom: 0.75rem;
 }
 
@@ -730,7 +730,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-title);
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 400;
-  color: var(--c-blue-pastel);
+  color: var(--c-olive);
   margin-bottom: 2rem;
   line-height: 1.15;
 }
@@ -765,7 +765,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-serif);
   font-size: 1.2rem;
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-olive);
   line-height: 1.4;
 }
 
@@ -794,7 +794,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-blue-pastel);
+  color: var(--c-olive);
   letter-spacing: 0.01em;
 }
 
@@ -816,15 +816,15 @@ body.flat-bg .header--scrolled {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--c-blue-pastel);
-  border: 1px solid var(--c-blue-pastel);
+  color: var(--c-olive);
+  border: 1px solid var(--c-olive);
   padding: 0.5rem 1.1rem;
   margin-top: 0.7rem;
   transition: background 0.2s, color 0.2s;
 }
 
 .timeline__map-link:hover {
-  background: var(--c-blue-pastel);
+  background: var(--c-olive);
   color: var(--c-cream);
 }
 
@@ -833,7 +833,7 @@ body.flat-bg .header--scrolled {
    pour signaler immédiatement qu'il s'agit d'un lieu différent */
 .timeline__item--venue {
   padding-left: 1.1rem;
-  border-left: 2px solid var(--c-terracotta);
+  border-left: 2px solid var(--c-olive);
 }
 
 .timeline__item--venue .timeline__heading {
@@ -847,7 +847,7 @@ body.flat-bg .header--scrolled {
   flex-shrink: 0;
   width: 14px;
   height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23954E2A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.11-7-12a7 7 0 0 1 14 0c0 4.89-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A1AB5B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.11-7-12a7 7 0 0 1 14 0c0 4.89-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -869,7 +869,7 @@ body.flat-bg .header--scrolled {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--c-blue);
+  color: var(--c-olive);
   margin-bottom: 0.6rem;
 }
 
@@ -932,7 +932,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-serif);
   font-size: 1.5rem;
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-olive);
   margin-bottom: 1.5rem;
 }
 
@@ -1042,7 +1042,7 @@ body.flat-bg .header--scrolled {
 }
 
 .photo-upload__preview-open:focus-visible {
-  outline: 2px solid var(--c-blue);
+  outline: 2px solid var(--c-olive);
   outline-offset: -2px;
 }
 
@@ -1125,9 +1125,9 @@ body.flat-bg .header--scrolled {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   background: none;
-  border: 1px solid var(--c-terracotta);
+  border: 1px solid var(--c-olive);
   border-radius: 1px;
   padding: 0.4rem 0.9rem;
   cursor: pointer;
@@ -1135,7 +1135,7 @@ body.flat-bg .header--scrolled {
 }
 
 .photo-upload__bulk-remove:hover {
-  background: var(--c-terracotta);
+  background: var(--c-olive);
   color: var(--c-white);
 }
 
@@ -1160,14 +1160,14 @@ body.flat-bg .header--scrolled {
 
 .photo-upload__preview-remove:hover,
 .photo-upload__preview-remove:focus-visible {
-  background: var(--c-terracotta);
+  background: var(--c-olive);
 }
 
 .photo-upload__status {
   display: none;
   margin-top: 1.1rem;
   font-size: 0.85rem;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
 }
 
 .photo-upload__submit {
@@ -1184,7 +1184,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-serif);
   font-size: 1.7rem;
   font-style: italic;
-  color: var(--c-blue);
+  color: var(--c-olive);
   margin-bottom: 0.6rem;
 }
 
@@ -1197,7 +1197,7 @@ body.flat-bg .header--scrolled {
    Footer
    ====================================================== */
 .footer {
-  padding: 3.5rem 2rem;
+  padding: 1.5rem 2rem;
   background: rgba(161, 171, 91, 0.08);
   border-top: 1px solid rgba(149, 78, 42, 0.25);
   text-align: center;
@@ -1209,15 +1209,15 @@ body.flat-bg .header--scrolled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.3rem;
 }
 
 .footer__names {
   font-family: var(--f-serif);
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: 400;
   font-style: italic;
-  color: var(--c-blue);
+  color: var(--c-olive);
 }
 
 .footer__date {
@@ -1245,14 +1245,14 @@ body.hero-bg .header--scrolled {
 }
 body.hero-bg .header__logo,
 body.hero-bg .nav__link {
-  color: var(--c-cream);
+  color: var(--c-olive);
 }
 body.hero-bg .nav__link:hover,
 body.hero-bg .nav__link.active {
-  color: var(--c-champagne);
+  color: var(--c-olive-h);
 }
 body.hero-bg .nav__toggle span {
-  background: var(--c-cream);
+  background: var(--c-olive);
 }
 
 body.hero-bg .hero__content {
@@ -1290,7 +1290,7 @@ body.hero-bg .footer {
   border-top: none;
 }
 body.hero-bg .footer__names {
-  color: var(--c-cream);
+  color: var(--c-olive);
 }
 body.hero-bg .footer__date {
   color: var(--c-olive);
@@ -1354,7 +1354,7 @@ body.hero-bg .footer__date {
   /* Le menu mobile déroulant garde un fond clair (voir .nav ci-dessus) :
      on y remet le texte "normal" même sur la page d'accueil (body.hero-bg) */
   body.hero-bg .nav__link {
-    color: var(--c-blue);
+    color: var(--c-olive);
   }
   body.hero-bg .nav__link:hover,
   body.hero-bg .nav__link.active {
@@ -1498,7 +1498,7 @@ body.hero-bg .footer__date {
   font-size: 1.9rem;
   font-weight: 400;
   font-style: italic;
-  color: var(--c-blue);
+  color: var(--c-olive);
   letter-spacing: 0.01em;
 }
 
@@ -1612,7 +1612,7 @@ body.hero-bg .footer__date {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-blue);
+  color: var(--c-olive);
   text-align: left;
   cursor: pointer;
   transition: color 0.25s;
