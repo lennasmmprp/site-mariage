@@ -414,7 +414,9 @@ body.hero-bg .header__logo-img {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--c-olive);
-  margin-bottom: 2rem;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .hero__names {
