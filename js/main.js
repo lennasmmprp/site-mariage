@@ -11,6 +11,13 @@
     'https://docs.google.com/forms/d/e/' +
     '1FAIpQLSe_nuM0FVCkLa0zyNlaANkvvysuvrlAoeglCeBvkFLF0MYuxA/formResponse';
 
+  // URL du point de réception des photos (Google Apps Script — ne jamais modifier)
+  const PHOTOS_UPLOAD_URL =
+    'https://script.google.com/macros/s/' +
+    'AKfycby7_YyPD4zurS9vLeI-eFpzhPhYWSqfKNud_xMD4jDDLeD64n_RNY3oULnkIurfxSUp3g/exec';
+
+  const PHOTO_MAX_MB = 15;
+
   /* =====================================================
      Vidéo de fond du hero — autoplay robuste + fallback image
      (notamment iPhone en mode économie d'énergie, où Safari
@@ -267,6 +274,87 @@
         submitBtn.textContent  = 'Envoyer ma réponse';
         submitBtn.disabled     = false;
         errorMsg.style.display = 'block';
+      }
+    });
+  }
+
+  /* =====================================================
+     Partage de photos — envoi vers Google Drive
+     ===================================================== */
+  const photoForm     = document.getElementById('photo-form');
+  const photoInput    = document.getElementById('photo-input');
+  const photoFileList = document.getElementById('photo-file-list');
+  const photoSubmit   = document.getElementById('photo-submit');
+  const photoStatus   = document.getElementById('photo-status');
+  const photoSuccess  = document.getElementById('photo-success');
+
+  const fileToBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+
+  if (photoForm && photoInput) {
+    photoInput.addEventListener('change', () => {
+      const files = [...photoInput.files];
+      photoStatus.style.display = 'none';
+      if (!files.length) {
+        photoFileList.textContent = '';
+      } else if (files.length === 1) {
+        photoFileList.textContent = files[0].name;
+      } else {
+        photoFileList.textContent = `${files.length} photos sélectionnées`;
+      }
+    });
+
+    photoForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const files = [...photoInput.files];
+
+      if (!files.length) {
+        photoStatus.textContent  = 'Choisissez au moins une photo avant d’envoyer.';
+        photoStatus.style.display = 'block';
+        return;
+      }
+
+      const tooBig = files.find(f => f.size > PHOTO_MAX_MB * 1024 * 1024);
+      if (tooBig) {
+        photoStatus.textContent  = `« ${tooBig.name} » dépasse ${PHOTO_MAX_MB} Mo. Choisissez une photo plus légère.`;
+        photoStatus.style.display = 'block';
+        return;
+      }
+
+      photoStatus.style.display = 'none';
+      photoSubmit.textContent   = 'Envoi en cours…';
+      photoSubmit.disabled      = true;
+
+      try {
+        for (const file of files) {
+          const base64 = await fileToBase64(file);
+          // mode: 'no-cors' : la réponse est opaque mais le fichier
+          // arrive bien dans le dossier Drive (même principe que le RSVP).
+          await fetch(PHOTOS_UPLOAD_URL, {
+            method: 'POST',
+            mode:   'no-cors',
+            body: JSON.stringify({
+              filename: file.name,
+              mimeType: file.type || 'image/jpeg',
+              data:     base64,
+            }),
+          });
+        }
+
+        photoForm.style.display    = 'none';
+        photoSuccess.style.display = 'block';
+        window.scrollTo({ top: photoSuccess.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+
+      } catch (_) {
+        photoStatus.textContent   = 'Une erreur est survenue. Merci de réessayer.';
+        photoStatus.style.display = 'block';
+        photoSubmit.textContent   = 'Envoyer';
+        photoSubmit.disabled      = false;
       }
     });
   }

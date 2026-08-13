@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Questions fréquentes — Mariage de Séverine et Yasser">
-  <title>FAQ — Séverine &amp; Yasser</title>
+  <meta name="description" content="Partagez vos photos — Mariage de Séverine et Yasser">
+  <title>Partagez vos photos — Séverine &amp; Yasser</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,8 +23,8 @@
           <li><a href="index.html"     class="nav__link">Accueil</a></li>
           <li><a href="programme.html" class="nav__link">Programme</a></li>
           <li><a href="dresscode.html" class="nav__link">Dress Code</a></li>
-          <li><a href="faq.html"       class="nav__link active" aria-current="page">FAQ</a></li>
-          <li><a href="photos.html"    class="nav__link">Partagez vos photos</a></li>
+          <li><a href="faq.html"       class="nav__link">FAQ</a></li>
+          <li><a href="photos.html"    class="nav__link active" aria-current="page">Partagez vos photos</a></li>
           <li><a href="rsvp.html"      class="nav__link nav__link--cta">Confirmez votre venue</a></li>
         </ul>
       </nav>
@@ -42,64 +42,43 @@
   <main>
 
     <!-- Bandeau -->
-    <div class="page-banner page-banner--faq">
-      <h1 class="page-banner__title">FAQ</h1>
+    <div class="page-banner page-banner--photos">
+      <h1 class="page-banner__title">Partagez vos photos</h1>
       <img class="page-banner__olive" src="images/olivier.jpg" alt="" aria-hidden="true">
     </div>
 
     <div class="section">
+      <div class="photo-upload">
 
-      <div class="accordion">
+        <p class="photo-upload__intro">
+          Vous avez de jolis souvenirs de la journée&nbsp;? Envoyez-les-nous directement depuis cette page&nbsp;: elles arriveront tout droit dans notre album.
+        </p>
 
-        <div class="accordion__item">
-          <button class="accordion__btn" aria-expanded="false">
-            Puis-je venir accompagné(e) ?
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion__body">
-            <p>Seules les personnes nommément invitées peuvent assister à notre mariage. Merci de votre compréhension.</p>
-          </div>
+        <!-- Message de succès (caché par défaut) -->
+        <div id="photo-success" class="photo-upload__success">
+          <p>Merci pour vos photos&nbsp;!</p>
+          <p>Elles sont bien arrivées jusqu'à nous.</p>
         </div>
 
-        <div class="accordion__item">
-          <button class="accordion__btn" aria-expanded="false">
-            Mes enfants sont-ils conviés ?
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion__body">
-            <p>Oui, bien sûr, vos enfants sont les bienvenus parmi nos invités.</p>
-          </div>
-        </div>
+        <form id="photo-form" novalidate>
+          <label for="photo-input" class="btn btn--outline">Choisir des photos</label>
+          <input
+            type="file"
+            id="photo-input"
+            name="photos"
+            accept="image/*"
+            multiple
+            class="photo-upload__input"
+          >
 
-        <div class="accordion__item">
-          <button class="accordion__btn" aria-expanded="false">
-            Comment dois-je m'habiller ?
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion__body">
-            <p>Vous trouverez sur la page Dress Code des inspirations pour le jour J.</p>
-          </div>
-        </div>
+          <p id="photo-file-list" class="photo-upload__filelist"></p>
 
-        <div class="accordion__item">
-          <button class="accordion__btn" aria-expanded="false">
-            Puis-je me garer sur place ?
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion__body">
-            <p>Oui, il y a 40 places de parking à la Mairie de Longjumeau et 150 places au Domaine des Rois.</p>
-          </div>
-        </div>
+          <p id="photo-status" class="photo-upload__status"></p>
 
-        <div class="accordion__item">
-          <button class="accordion__btn" aria-expanded="false">
-            Existe-t-il une liste de mariage ?
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion__body">
-            <p>Nous n'avons pas établi de liste de cadeaux. Le jour J, une boîte aux lettres sera mise à votre disposition afin que vous puissiez y déposer vos attentions ou vos messages. Pour nous, le plus important reste votre présence à nos côtés.</p>
+          <div class="photo-upload__submit">
+            <button type="submit" class="btn btn--primary" id="photo-submit">Envoyer</button>
           </div>
-        </div>
+        </form>
 
       </div>
     </div>
