@@ -1307,6 +1307,10 @@ body.flat-bg .header--scrolled {
   color: #556B2F;
 }
 
+.footer--no-yellow {
+  background: transparent;
+}
+
 /* ======================================================
    Page d'accueil avec image de fond — lisibilité du texte
    (tout est scopé à body.hero-bg pour ne pas affecter
