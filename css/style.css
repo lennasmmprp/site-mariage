@@ -209,7 +209,7 @@ body.hero-bg .header__logo-img {
 }
 
 .nav__link:hover,
-.nav__link.active { color: var(--c-beurre); }
+.nav__link.active { color: var(--c-white); }
 
 .nav__link:hover::after,
 .nav__link.active::after { width: 100%; }
@@ -577,19 +577,19 @@ body.hero-bg .header__logo-img {
   }
 }
 
-/* Programme, Dress Code, FAQ — fond de page 100% uniforme #F3E9B5,
+/* Programme, Dress Code, FAQ — fond de page 100% uniforme #F6EEC6 (jaune beurre légèrement plus clair),
    sans dégradé ni fond crème/beige, du bandeau jusqu'au footer
    (scopé à body.flat-bg pour ne pas affecter les autres pages) */
 body.flat-bg {
-  background: #F3E9B5;
+  background: #F6EEC6;
 }
 body.flat-bg .page-banner,
 body.flat-bg .section,
 body.flat-bg .footer {
-  background: #F3E9B5;
+  background: #F6EEC6;
 }
 body.flat-bg .header--scrolled {
-  background: #F3E9B5;
+  background: #F6EEC6;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -1249,7 +1249,7 @@ body.hero-bg .nav__link {
 }
 body.hero-bg .nav__link:hover,
 body.hero-bg .nav__link.active {
-  color: var(--c-olive-h);
+  color: var(--c-white);
 }
 body.hero-bg .nav__toggle span {
   background: var(--c-olive);
@@ -1351,14 +1351,20 @@ body.hero-bg .footer__date {
     margin-top: 0.5rem;
   }
 
-  /* Le menu mobile déroulant garde un fond clair (voir .nav ci-dessus) :
-     on y remet le texte "normal" même sur la page d'accueil (body.hero-bg) */
+  /* Le menu mobile déroulant a toujours un fond clair (voir .nav ci-dessus),
+     y compris sur la page d'accueil (body.hero-bg) : le blanc au survol
+     (voir .nav__link:hover plus haut) n'y serait pas lisible, on garde
+     donc un vert plus soutenu dans ce contexte précis */
   body.hero-bg .nav__link {
     color: var(--c-olive);
   }
+  .nav__link:hover,
+  .nav__link.active {
+    color: var(--c-olive-h);
+  }
   body.hero-bg .nav__link:hover,
   body.hero-bg .nav__link.active {
-    color: var(--c-beurre);
+    color: var(--c-olive-h);
   }
 
   .countdown__item + .countdown__item::before {
