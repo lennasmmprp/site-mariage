@@ -30,9 +30,9 @@
   --c-blue:            #114477;
 
   /* Texte courant */
-  --c-text:            #A1AB5B;   /* corps de texte */
-  --c-text-mid:        #A1AB5B;
-  --c-text-muted:      #8C9270;   /* teinte discrète dérivée du vert olive */
+  --c-text:            #000000;   /* corps de texte */
+  --c-text-mid:        #000000;
+  --c-text-muted:      #000000;
   --c-white:           #FFFFFF;
 
   --f-serif: 'Cormorant Garamond', Georgia, serif;
@@ -175,9 +175,11 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 }
 
 /* Page d'accueil — header sur fond sombre, logo inversé en blanc
-   pour rester lisible (comme le texte de nav dans ce contexte) */
+   pour rester lisible (comme le texte de nav dans ce contexte),
+   et agrandi de 30% (46px -> 60px) */
 body.hero-bg .header__logo-img {
   filter: brightness(0) invert(1);
+  height: 60px;
 }
 
 .nav__list {
@@ -446,6 +448,7 @@ body.hero-bg .header__logo-img {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 40px;
   margin-bottom: 3.75rem;
   width: 100%;
 }
@@ -538,6 +541,81 @@ body.hero-bg .header__logo-img {
 }
 
 /* ======================================================
+   Page hero — image de fond plein écran (Programme, Dress Code,
+   FAQ, RSVP, Partagez vos photos)
+   ====================================================== */
+.page-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.page-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.page-hero__title {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
+  font-family: var(--f-title);
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1.15;
+  color: var(--c-white);
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    height: 100vh;
+  }
+  .page-hero::after {
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .page-hero__title {
+    font-size: 28px;
+  }
+}
+
+/* Header transparent au sommet des pages à héros photo : logo et
+   icône menu inversés en blanc pour rester lisibles sur l'image
+   sombre (une fois "header--scrolled" actif, ils retrouvent leur
+   traitement normal sur fond clair). Sur mobile, seuls le logo et
+   l'icône sont concernés — le tiroir de menu, lui, garde un fond
+   clair et doit donc garder un texte foncé (voir plus bas). */
+body:has(.page-hero) .header:not(.header--scrolled) .header__logo-img {
+  filter: brightness(0) invert(1);
+}
+body:has(.page-hero) .header:not(.header--scrolled) .nav__toggle span {
+  background: var(--c-white);
+}
+@media (min-width: 769px) {
+  body:has(.page-hero) .header:not(.header--scrolled) .nav__link {
+    color: var(--c-white);
+  }
+}
+
+/* ======================================================
    Page banner (inner pages)
    ====================================================== */
 .page-banner {
@@ -584,10 +662,10 @@ body.flat-bg {
   background: #F6EEC6;
 }
 body.flat-bg .page-banner,
-body.flat-bg .section,
-body.flat-bg .footer {
+body.flat-bg .section {
   background: #F6EEC6;
 }
+/* Le footer garde sa propre couleur #F3E9B5 (voir règle .footer de base) */
 body.flat-bg .header--scrolled {
   background: #F6EEC6;
   backdrop-filter: none;
@@ -791,11 +869,25 @@ body.flat-bg .header--scrolled {
 .timeline__item:last-child  { border-bottom: none; padding-bottom: 0; }
 
 .timeline__heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ACD1D5;
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
   color: var(--c-white);
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .timeline__heading {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .timeline__heading b {
@@ -836,18 +928,12 @@ body.flat-bg .header--scrolled {
   border-left: 2px solid var(--c-olive);
 }
 
-.timeline__item--venue .timeline__heading {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .timeline__item--venue .timeline__heading::before {
   content: '';
   flex-shrink: 0;
   width: 14px;
   height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A1AB5B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.11-7-12a7 7 0 0 1 14 0c0 4.89-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.11-7-12a7 7 0 0 1 14 0c0 4.89-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -1198,7 +1284,7 @@ body.flat-bg .header--scrolled {
    ====================================================== */
 .footer {
   padding: 1.5rem 2rem;
-  background: rgba(161, 171, 91, 0.08);
+  background: #F3E9B5;
   border-top: 1px solid rgba(149, 78, 42, 0.25);
   text-align: center;
 }
@@ -1217,14 +1303,14 @@ body.flat-bg .header--scrolled {
   font-size: 1.05rem;
   font-weight: 400;
   font-style: italic;
-  color: var(--c-olive);
+  color: #556B2F;
 }
 
 .footer__date {
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--c-olive);
+  color: #556B2F;
 }
 
 /* ======================================================
@@ -1285,16 +1371,8 @@ body.hero-bg .countdown__done {
   color: var(--c-champagne);
 }
 
-body.hero-bg .footer {
-  background: rgba(38, 28, 20, 0.48);
-  border-top: none;
-}
-body.hero-bg .footer__names {
-  color: var(--c-olive);
-}
-body.hero-bg .footer__date {
-  color: var(--c-olive);
-}
+/* Footer identique sur toutes les pages, y compris l'accueil
+   (fond #F3E9B5 / texte #556B2F — voir règles .footer de base) */
 
 /* ======================================================
    Responsive
