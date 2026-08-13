@@ -30,8 +30,8 @@
   --c-blue:            #114477;
 
   /* Texte courant */
-  --c-text:            #333333;   /* corps de texte */
-  --c-text-mid:        #4D4D4D;
+  --c-text:            #A1AB5B;   /* corps de texte */
+  --c-text-mid:        #A1AB5B;
   --c-text-muted:      #8C9270;   /* teinte discrète dérivée du vert olive */
   --c-white:           #FFFFFF;
 
@@ -170,7 +170,7 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 
 .header__logo-img {
   display: block;
-  height: 38px;
+  height: 46px;
   width: auto;
 }
 
@@ -411,7 +411,7 @@ body.hero-bg .header__logo-img {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
   margin-bottom: 2rem;
 }
 
@@ -784,7 +784,7 @@ body.flat-bg .header--scrolled {
 
 .timeline__item {
   padding: 1.75rem 0;
-  border-bottom: 1px solid var(--c-sand-border);
+  border-bottom: 1px solid var(--c-white);
 }
 
 .timeline__item:first-child { padding-top: 0; }
@@ -826,6 +826,30 @@ body.flat-bg .header--scrolled {
 .timeline__map-link:hover {
   background: var(--c-blue-pastel);
   color: var(--c-cream);
+}
+
+/* Programme — étapes avec changement de lieu (Cérémonie civile,
+   Shooting au Domaine des Rois) : liseré + repère visuel discrets
+   pour signaler immédiatement qu'il s'agit d'un lieu différent */
+.timeline__item--venue {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--c-terracotta);
+}
+
+.timeline__item--venue .timeline__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timeline__item--venue .timeline__heading::before {
+  content: '';
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23954E2A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.11-7-12a7 7 0 0 1 14 0c0 4.89-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /* RSVP Form */
@@ -1200,25 +1224,8 @@ body.flat-bg .header--scrolled {
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--c-terracotta);
+  color: var(--c-olive);
 }
-
-.footer__nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem 1rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--c-terracotta);
-  margin-top: 0.25rem;
-}
-
-.footer__nav a { transition: color 0.2s; }
-.footer__nav a:hover { color: var(--c-beurre); }
-.footer__nav .sep { color: var(--c-sand-border); }
 
 /* ======================================================
    Page d'accueil avec image de fond — lisibilité du texte
@@ -1257,7 +1264,7 @@ body.hero-bg .hero__subtitle {
   color: rgba(253, 251, 240, 0.85);
 }
 body.hero-bg .hero__date {
-  color: var(--c-champagne);
+  color: var(--c-olive);
 }
 body.hero-bg .hero__names {
   color: var(--c-cream);
@@ -1285,15 +1292,8 @@ body.hero-bg .footer {
 body.hero-bg .footer__names {
   color: var(--c-cream);
 }
-body.hero-bg .footer__date,
-body.hero-bg .footer__nav {
-  color: rgba(253, 251, 240, 0.75);
-}
-body.hero-bg .footer__nav a:hover {
-  color: var(--c-champagne);
-}
-body.hero-bg .footer__nav .sep {
-  color: rgba(253, 251, 240, 0.35);
+body.hero-bg .footer__date {
+  color: var(--c-olive);
 }
 
 /* ======================================================
@@ -1508,7 +1508,7 @@ body.hero-bg .footer__nav .sep {
   box-shadow:
     0 6px 24px rgba(17, 68, 119, 0.10),
     0 2px 6px  rgba(17, 68, 119, 0.05);
-  width: 260px;
+  width: 300px;
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
   will-change: transform;
 }
@@ -1525,7 +1525,7 @@ body.hero-bg .footer__nav .sep {
 
 .polaroid img {
   width: 100%;
-  height: 310px;
+  height: 360px;
   object-fit: cover;
   display: block;
 }
@@ -1533,7 +1533,7 @@ body.hero-bg .footer__nav .sep {
 /* Variante sans marge — photo collée aux 4 bords du Polaroid (page Dress Code) */
 .polaroid--flush {
   padding: 0;
-  height: 310px;
+  height: 360px;
 }
 
 .polaroid--flush img {
@@ -1558,27 +1558,27 @@ body.hero-bg .footer__nav .sep {
   }
 
   .polaroid {
-    width: 220px;
+    width: 260px;
   }
 
-  .polaroid img { height: 260px; }
+  .polaroid img { height: 310px; }
 
-  .polaroid--flush { height: 260px; }
+  .polaroid--flush { height: 310px; }
 
   .timeline { max-width: 100%; }
 }
 
 @media (max-width: 480px) {
   .polaroid {
-    width: 190px;
+    width: 220px;
     padding: 10px 10px 44px;
   }
 
-  .polaroid img { height: 220px; }
+  .polaroid img { height: 260px; }
 
   .polaroid--flush {
     padding: 0;
-    height: 220px;
+    height: 260px;
   }
 
   .polaroid-label { font-size: 1.6rem; }
