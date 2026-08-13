@@ -794,7 +794,7 @@ body.flat-bg .header--scrolled {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-olive);
+  color: var(--c-white);
   letter-spacing: 0.01em;
 }
 
