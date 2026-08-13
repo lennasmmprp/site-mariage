@@ -283,7 +283,7 @@
      ===================================================== */
   const photoForm     = document.getElementById('photo-form');
   const photoInput    = document.getElementById('photo-input');
-  const photoFileList = document.getElementById('photo-file-list');
+  const photoPreviews = document.getElementById('photo-previews');
   const photoSubmit   = document.getElementById('photo-submit');
   const photoStatus   = document.getElementById('photo-status');
   const photoSuccess  = document.getElementById('photo-success');
@@ -296,32 +296,71 @@
   });
 
   if (photoForm && photoInput) {
+    // Fichiers retenus, chacun avec son URL de prévisualisation locale
+    // (indépendant de photoInput.files, pour permettre d'en retirer un
+    // sans perdre les autres — le navigateur ne permet pas de modifier
+    // une FileList existante).
+    let selectedPhotos = [];
+
+    const renderPreviews = () => {
+      photoPreviews.innerHTML = '';
+
+      selectedPhotos.forEach((entry, index) => {
+        const card = document.createElement('div');
+        card.className = 'photo-upload__preview';
+
+        const img = document.createElement('img');
+        img.src = entry.url;
+        img.alt = '';
+        card.appendChild(img);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'photo-upload__preview-remove';
+        removeBtn.setAttribute('aria-label', `Retirer ${entry.file.name}`);
+        removeBtn.textContent = '×';
+        removeBtn.addEventListener('click', () => {
+          URL.revokeObjectURL(entry.url);
+          selectedPhotos.splice(index, 1);
+          renderPreviews();
+        });
+        card.appendChild(removeBtn);
+
+        photoPreviews.appendChild(card);
+      });
+    };
+
     photoInput.addEventListener('change', () => {
-      const files = [...photoInput.files];
+      const newFiles = [...photoInput.files];
       photoStatus.style.display = 'none';
-      if (!files.length) {
-        photoFileList.textContent = '';
-      } else if (files.length === 1) {
-        photoFileList.textContent = files[0].name;
-      } else {
-        photoFileList.textContent = `${files.length} photos sélectionnées`;
-      }
+
+      newFiles.forEach(file => {
+        if (file.size > PHOTO_MAX_MB * 1024 * 1024) {
+          photoStatus.textContent   = `« ${file.name} » dépasse ${PHOTO_MAX_MB} Mo et n'a pas été ajoutée.`;
+          photoStatus.style.display = 'block';
+          return;
+        }
+        const alreadyAdded = selectedPhotos.some(entry =>
+          entry.file.name === file.name &&
+          entry.file.size === file.size &&
+          entry.file.lastModified === file.lastModified
+        );
+        if (!alreadyAdded) {
+          selectedPhotos.push({ file, url: URL.createObjectURL(file) });
+        }
+      });
+
+      // On vide l'input pour pouvoir rouvrir le sélecteur et ajouter
+      // d'autres photos sans perdre celles déjà choisies.
+      photoInput.value = '';
+      renderPreviews();
     });
 
     photoForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const files = [...photoInput.files];
-
-      if (!files.length) {
+      if (!selectedPhotos.length) {
         photoStatus.textContent  = 'Choisissez au moins une photo avant d’envoyer.';
-        photoStatus.style.display = 'block';
-        return;
-      }
-
-      const tooBig = files.find(f => f.size > PHOTO_MAX_MB * 1024 * 1024);
-      if (tooBig) {
-        photoStatus.textContent  = `« ${tooBig.name} » dépasse ${PHOTO_MAX_MB} Mo. Choisissez une photo plus légère.`;
         photoStatus.style.display = 'block';
         return;
       }
@@ -331,20 +370,23 @@
       photoSubmit.disabled      = true;
 
       try {
-        for (const file of files) {
-          const base64 = await fileToBase64(file);
+        for (const entry of selectedPhotos) {
+          const base64 = await fileToBase64(entry.file);
           // mode: 'no-cors' : la réponse est opaque mais le fichier
           // arrive bien dans le dossier Drive (même principe que le RSVP).
           await fetch(PHOTOS_UPLOAD_URL, {
             method: 'POST',
             mode:   'no-cors',
             body: JSON.stringify({
-              filename: file.name,
-              mimeType: file.type || 'image/jpeg',
+              filename: entry.file.name,
+              mimeType: entry.file.type || 'image/jpeg',
               data:     base64,
             }),
           });
         }
+
+        selectedPhotos.forEach(entry => URL.revokeObjectURL(entry.url));
+        selectedPhotos = [];
 
         photoForm.style.display    = 'none';
         photoSuccess.style.display = 'block';
