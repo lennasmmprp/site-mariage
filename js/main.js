@@ -281,15 +281,20 @@
   /* =====================================================
      Partage de photos — envoi vers Google Drive
      ===================================================== */
-  const photoForm      = document.getElementById('photo-form');
-  const photoInput     = document.getElementById('photo-input');
-  const photoPreviews  = document.getElementById('photo-previews');
-  const photoSubmit    = document.getElementById('photo-submit');
-  const photoStatus    = document.getElementById('photo-status');
-  const photoSuccess   = document.getElementById('photo-success');
-  const photoBulkBar   = document.getElementById('photo-bulk-bar');
-  const photoBulkCount = document.getElementById('photo-bulk-count');
-  const photoBulkBtn   = document.getElementById('photo-bulk-remove');
+  const photoForm         = document.getElementById('photo-form');
+  const photoInput        = document.getElementById('photo-input');
+  const photoPreviews     = document.getElementById('photo-previews');
+  const photoSubmit       = document.getElementById('photo-submit');
+  const photoStatus       = document.getElementById('photo-status');
+  const photoSuccess      = document.getElementById('photo-success');
+  const photoSuccessTitle  = document.getElementById('photo-success-title');
+  const photoSuccessDetail = document.getElementById('photo-success-detail');
+  const photoBulkBar      = document.getElementById('photo-bulk-bar');
+  const photoBulkCount    = document.getElementById('photo-bulk-count');
+  const photoBulkBtn      = document.getElementById('photo-bulk-remove');
+  const photoProgress     = document.getElementById('photo-progress');
+  const photoProgressFill = document.getElementById('photo-progress-fill');
+  const photoProgressText = document.getElementById('photo-progress-text');
 
   const lightbox      = document.getElementById('photo-lightbox');
   const lightboxImage  = document.getElementById('lightbox-image');
@@ -309,8 +314,11 @@
   // nettement l'envoi sans perte visible à l'écran. Repli silencieux
   // sur le fichier d'origine si la compression échoue ou n'apporte rien
   // (GIF animés, images déjà petites, format non décodable…).
-  const PHOTO_MAX_DIMENSION = 1920;
-  const PHOTO_JPEG_QUALITY  = 0.82;
+  const PHOTO_MAX_DIMENSION       = 1200;
+  const PHOTO_JPEG_QUALITY        = 0.8;
+  const PHOTO_MAX_COUNT           = 10;
+  const PHOTO_MAX_COMPRESSED_MB   = 10;
+  const PHOTO_UPLOAD_MAX_RETRIES  = 2;
 
   const compressImage = file => new Promise((resolve) => {
     const original = { blob: file, filename: file.name, mimeType: file.type || 'image/jpeg' };
@@ -370,6 +378,7 @@
     // une FileList existante).
     let selectedPhotos = [];
     let lightboxIndex  = 0;
+    let sending         = false;
 
     const updateBulkBar = () => {
       const count = selectedPhotos.filter(entry => entry.selected).length;
@@ -424,6 +433,7 @@
       selectedPhotos.forEach((entry, index) => {
         const card = document.createElement('div');
         card.className = 'photo-upload__preview';
+        if (entry.status === 'uploading') card.classList.add('photo-upload__preview--uploading');
 
         // Sélection multiple (case à cocher)
         const selectLabel = document.createElement('label');
@@ -431,6 +441,7 @@
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = !!entry.selected;
+        checkbox.disabled = sending;
         checkbox.setAttribute('aria-label', `Sélectionner ${entry.file.name}`);
         checkbox.addEventListener('change', () => {
           entry.selected = checkbox.checked;
@@ -458,9 +469,11 @@
         const removeBtn = document.createElement('button');
         removeBtn.type = 'button';
         removeBtn.className = 'photo-upload__preview-remove';
+        removeBtn.disabled = sending;
         removeBtn.setAttribute('aria-label', `Retirer ${entry.file.name}`);
         removeBtn.textContent = '×';
         removeBtn.addEventListener('click', () => {
+          if (sending) return;
           URL.revokeObjectURL(entry.url);
           selectedPhotos.splice(index, 1);
           renderPreviews();
@@ -469,11 +482,22 @@
         });
         card.appendChild(removeBtn);
 
+        // Icône de statut d'envoi (✓ succès / ✗ échec)
+        if (entry.status === 'success' || entry.status === 'error') {
+          const statusIcon = document.createElement('span');
+          statusIcon.className = 'photo-upload__preview-status photo-upload__preview-status--' +
+            (entry.status === 'success' ? 'success' : 'error');
+          statusIcon.textContent = entry.status === 'success' ? '✓' : '✗';
+          statusIcon.setAttribute('aria-hidden', 'true');
+          card.appendChild(statusIcon);
+        }
+
         photoPreviews.appendChild(card);
       });
     };
 
     photoBulkBtn.addEventListener('click', () => {
+      if (sending) return;
       selectedPhotos = selectedPhotos.filter(entry => {
         if (entry.selected) URL.revokeObjectURL(entry.url);
         return !entry.selected;
@@ -484,10 +508,21 @@
     });
 
     photoInput.addEventListener('change', () => {
+      if (sending) { photoInput.value = ''; return; }
+
       const newFiles = [...photoInput.files];
       photoStatus.style.display = 'none';
+      let limitWarned = false;
 
       newFiles.forEach(file => {
+        if (selectedPhotos.length >= PHOTO_MAX_COUNT) {
+          if (!limitWarned) {
+            photoStatus.textContent   = `Vous ne pouvez pas ajouter plus de ${PHOTO_MAX_COUNT} photos par envoi.`;
+            photoStatus.style.display = 'block';
+            limitWarned = true;
+          }
+          return;
+        }
         if (file.size > PHOTO_MAX_MB * 1024 * 1024) {
           photoStatus.textContent   = `« ${file.name} » dépasse ${PHOTO_MAX_MB} Mo et n'a pas été ajoutée.`;
           photoStatus.style.display = 'block';
@@ -499,7 +534,7 @@
           entry.file.lastModified === file.lastModified
         );
         if (!alreadyAdded) {
-          selectedPhotos.push({ file, url: URL.createObjectURL(file), selected: false });
+          selectedPhotos.push({ file, url: URL.createObjectURL(file), selected: false, status: null });
         }
       });
 
@@ -509,8 +544,27 @@
       renderPreviews();
     });
 
+    // Envoie une photo déjà compressée vers Drive, avec jusqu'à
+    // PHOTO_UPLOAD_MAX_RETRIES tentatives supplémentaires en cas d'échec
+    // (connexion lente/instable) avant d'abandonner cette photo précise.
+    const uploadWithRetry = async (filename, mimeType, base64) => {
+      for (let attempt = 0; attempt <= PHOTO_UPLOAD_MAX_RETRIES; attempt++) {
+        try {
+          await fetch(PHOTOS_UPLOAD_URL, {
+            method: 'POST',
+            mode:   'no-cors',
+            body: JSON.stringify({ filename, mimeType, data: base64 }),
+          });
+          return;
+        } catch (err) {
+          if (attempt === PHOTO_UPLOAD_MAX_RETRIES) throw err;
+        }
+      }
+    };
+
     photoForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (sending) return;
 
       if (!selectedPhotos.length) {
         photoStatus.textContent  = 'Choisissez au moins une photo avant d’envoyer.';
@@ -519,42 +573,88 @@
       }
 
       photoStatus.style.display = 'none';
+      sending = true;
       const total = selectedPhotos.length;
-      let completed = 0;
-      photoSubmit.textContent = total > 1 ? `Envoi en cours… (0/${total})` : 'Envoi en cours…';
+      let successCount = 0;
+      let failCount    = 0;
+
+      photoSubmit.textContent = 'Envoi en cours…';
       photoSubmit.disabled    = true;
+      photoProgress.hidden    = false;
+      photoProgressFill.style.width = '0%';
 
-      try {
-        // Compression + envoi en parallèle (beaucoup plus rapide que
-        // photo par photo, surtout à plusieurs) ; mode: 'no-cors' :
-        // la réponse est opaque mais le fichier arrive bien dans le
-        // dossier Drive (même principe que le RSVP).
-        await Promise.all(selectedPhotos.map(async (entry) => {
+      const setProgress = (doneCount, label) => {
+        const pct = Math.round((doneCount / total) * 100);
+        photoProgressFill.style.width = pct + '%';
+        photoProgressText.textContent = `${label} — ${pct}%`;
+      };
+
+      // Envoi photo par photo (pas en parallèle) pour rester léger sur
+      // les connexions lentes et pouvoir afficher une progression fiable.
+      for (let i = 0; i < selectedPhotos.length; i++) {
+        const entry = selectedPhotos[i];
+        entry.status = 'uploading';
+        renderPreviews();
+        setProgress(i, `Photo ${i + 1}/${total} en cours…`);
+
+        try {
           const { blob, filename, mimeType } = await compressImage(entry.file);
-          const base64 = await fileToBase64(blob);
-          await fetch(PHOTOS_UPLOAD_URL, {
-            method: 'POST',
-            mode:   'no-cors',
-            body: JSON.stringify({ filename, mimeType, data: base64 }),
-          });
-          completed++;
-          photoSubmit.textContent = total > 1 ? `Envoi en cours… (${completed}/${total})` : 'Envoi en cours…';
-        }));
 
-        selectedPhotos.forEach(entry => URL.revokeObjectURL(entry.url));
-        selectedPhotos = [];
-        closeLightbox();
+          if (blob.size > PHOTO_MAX_COMPRESSED_MB * 1024 * 1024) {
+            entry.status = 'error';
+            failCount++;
+            photoStatus.textContent   = `« ${entry.file.name} » dépasse ${PHOTO_MAX_COMPRESSED_MB} Mo même après compression et n'a pas été envoyée.`;
+            photoStatus.style.display = 'block';
+          } else {
+            const base64 = await fileToBase64(blob);
+            await uploadWithRetry(filename, mimeType, base64);
+            entry.status = 'success';
+            successCount++;
+          }
+        } catch (_) {
+          entry.status = 'error';
+          failCount++;
+        }
 
-        photoForm.style.display    = 'none';
+        renderPreviews();
+        setProgress(i + 1, i + 1 < total ? `Photo ${i + 2}/${total} en cours…` : 'Envoi terminé');
+      }
+
+      sending = false;
+      photoProgress.hidden = true;
+
+      // On retire du panier les photos envoyées avec succès ; celles en
+      // échec restent affichées (icône ✗) pour permettre un nouvel essai.
+      selectedPhotos = selectedPhotos.filter(entry => {
+        if (entry.status === 'success') {
+          URL.revokeObjectURL(entry.url);
+          return false;
+        }
+        return true;
+      });
+      updateBulkBar();
+      if (lightbox.classList.contains('lightbox--open')) updateLightboxImage();
+
+      photoSubmit.textContent = 'Envoyer';
+      photoSubmit.disabled    = false;
+
+      if (successCount > 0) {
+        photoSuccessTitle.textContent = `${successCount} photo${successCount > 1 ? 's' : ''} envoyée${successCount > 1 ? 's' : ''} avec succès !`;
+        photoSuccessDetail.textContent = failCount
+          ? `${failCount} photo${failCount > 1 ? 's' : ''} n'${failCount > 1 ? 'ont' : 'a'} pas pu être envoyée${failCount > 1 ? 's' : ''}. Vous pouvez réessayer avec ${failCount > 1 ? 'celles restantes' : 'celle-ci'} ci-dessous.`
+          : `Elles sont bien arrivées jusqu'à nous.`;
+
+        if (failCount === 0) {
+          photoForm.style.display = 'none';
+        }
         photoSuccess.style.display = 'block';
         window.scrollTo({ top: photoSuccess.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
-
-      } catch (_) {
-        photoStatus.textContent   = 'Une erreur est survenue. Merci de réessayer.';
+      } else {
+        photoStatus.textContent   = 'Aucune photo n’a pu être envoyée. Merci de réessayer.';
         photoStatus.style.display = 'block';
-        photoSubmit.textContent   = 'Envoyer';
-        photoSubmit.disabled      = false;
       }
+
+      renderPreviews();
     });
   }
 

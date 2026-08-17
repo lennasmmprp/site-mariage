@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
-  <link rel="preload" as="image" href="image paratagez vos photos.jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css?v=26">
+  <link rel="preload" as="image" href="image fond/image fond partagez vos photos.png" fetchpriority="high">
   <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body class="flat-bg">
@@ -44,7 +44,7 @@
 
     <!-- Héros -->
     <div class="page-hero">
-      <img class="page-hero__bg" src="image paratagez vos photos.jpeg" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+      <img class="page-hero__bg" src="image fond/image fond partagez vos photos.png" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
       <h1 class="page-hero__title">Partagez vos photos</h1>
     </div>
 
@@ -54,11 +54,12 @@
         <p class="photo-upload__intro">
           Vous avez de jolis souvenirs de la journée&nbsp;? Envoyez-les-nous directement depuis cette page&nbsp;: elles arriveront tout droit dans notre album.
         </p>
+        <p class="photo-upload__hint">10 photos maximum par envoi &middot; compressées automatiquement</p>
 
         <!-- Message de succès (caché par défaut) -->
         <div id="photo-success" class="photo-upload__success">
-          <p>Merci pour vos photos&nbsp;!</p>
-          <p>Elles sont bien arrivées jusqu'à nous.</p>
+          <p id="photo-success-title">Merci pour vos photos&nbsp;!</p>
+          <p id="photo-success-detail">Elles sont bien arrivées jusqu'à nous.</p>
         </div>
 
         <form id="photo-form" novalidate>
@@ -80,6 +81,13 @@
           <div id="photo-previews" class="photo-upload__previews"></div>
 
           <p id="photo-status" class="photo-upload__status"></p>
+
+          <div id="photo-progress" class="photo-upload__progress" hidden>
+            <div class="photo-upload__progress-bar">
+              <div id="photo-progress-fill" class="photo-upload__progress-fill"></div>
+            </div>
+            <p id="photo-progress-text" class="photo-upload__progress-text"></p>
+          </div>
 
           <div class="photo-upload__submit">
             <button type="submit" class="btn btn--primary" id="photo-submit">Envoyer</button>
@@ -107,6 +115,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

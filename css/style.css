@@ -1086,7 +1086,14 @@ body.flat-bg .header--scrolled {
   font-size: 1rem;
   color: var(--c-text-mid);
   line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.photo-upload__hint {
+  font-size: 0.78rem;
+  color: var(--c-text-muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
 }
 
 .photo-upload__input {
@@ -1254,6 +1261,69 @@ body.flat-bg .header--scrolled {
   margin-top: 1.1rem;
   font-size: 0.85rem;
   color: var(--c-olive);
+}
+
+.photo-upload__progress {
+  margin-top: 1.25rem;
+}
+
+.photo-upload__progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--c-sand-border);
+  overflow: hidden;
+}
+
+.photo-upload__progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--c-olive);
+  transition: width 0.25s ease;
+}
+
+.photo-upload__progress-text {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--c-text-mid);
+}
+
+.photo-upload__preview-status {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--c-white);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+
+.photo-upload__preview-status--success,
+.photo-upload__preview-status--error {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.photo-upload__preview-status--success {
+  background: var(--c-green);
+}
+
+.photo-upload__preview-status--error {
+  background: var(--c-terracotta);
+}
+
+.photo-upload__preview--uploading img {
+  opacity: 0.55;
 }
 
 .photo-upload__submit {
