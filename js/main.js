@@ -161,23 +161,32 @@
   }
 
   /* =====================================================
-     Parallaxe — bandeau des pages intérieures
+     Parallaxe légère — image de fond des héros de pages
+     (Programme, Dress Code, FAQ, RSVP, Partagez vos photos).
+     translateY plutôt que background-attachment: fixed, qui est
+     mal supporté sur Safari iOS — l'image déborde de 10% en haut/bas
+     (voir .page-hero__bg) pour ne jamais laisser de bord vide.
      ===================================================== */
-  const pageBanner = document.querySelector('.page-banner');
-  if (pageBanner) {
+  const heroBg = document.querySelector('.page-hero__bg');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (heroBg && !prefersReducedMotion) {
+    const heroEl = heroBg.closest('.page-hero');
+    const PARALLAX_FACTOR = 0.08;
     let ticking = false;
-    const updateParallax = () => {
+    const updateHeroParallax = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          const limit = pageBanner.offsetHeight + 120;
-          const offset = Math.min(window.scrollY, limit) * 0.28;
-          pageBanner.style.transform = `translateY(${offset.toFixed(1)}px)`;
+          const limit  = heroEl.offsetHeight;
+          const offset = Math.min(window.scrollY, limit) * PARALLAX_FACTOR;
+          heroBg.style.transform = `translateY(${offset.toFixed(1)}px)`;
           ticking = false;
         });
         ticking = true;
       }
     };
-    window.addEventListener('scroll', updateParallax, { passive: true });
+    window.addEventListener('scroll', updateHeroParallax, { passive: true });
+    updateHeroParallax();
   }
 
   /* =====================================================

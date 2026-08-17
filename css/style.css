@@ -394,6 +394,9 @@ body.hero-bg .header__logo-img {
     opacity: 1 !important;
     transform: none !important;
   }
+  .page-hero__bg {
+    transform: none !important;
+  }
 }
 
 .hero__subtitle {
@@ -557,10 +560,18 @@ body.hero-bg .header__logo-img {
 
 .page-hero__bg {
   position: absolute;
-  inset: 0;
+  /* Légèrement plus grand que le conteneur (débord de 10% en haut/bas)
+     pour laisser de la marge au léger effet de parallaxe ci-dessous
+     sans jamais laisser apparaître de bord vide */
+  top: -10%;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
+  max-width: none;
   object-fit: cover;
+  object-position: center center;
+  image-rendering: -webkit-optimize-contrast;
+  will-change: transform;
   z-index: 0;
 }
 
