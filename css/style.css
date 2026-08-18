@@ -577,6 +577,10 @@ body.hero-bg .header__logo-img {
   z-index: 0;
 }
 
+.page-hero__bg--programme {
+  object-position: center 70%;
+}
+
 .page-hero::after {
   content: '';
   position: absolute;
@@ -1777,7 +1781,7 @@ body.hero-bg .countdown__done {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-blue-pastel);
+  color: var(--c-text);
   text-align: left;
   cursor: pointer;
   transition: color 0.25s;
