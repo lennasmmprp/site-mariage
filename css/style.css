@@ -575,12 +575,6 @@ body.hero-bg .header__logo-img {
   z-index: 0;
 }
 
-/* Confirmez votre venue — recadrage pour cadrer davantage sur le
-   couple et moins sur la nature en haut de l'image */
-.page-hero__bg--rsvp {
-  object-position: center 70%;
-}
-
 .page-hero::after {
   content: '';
   position: absolute;
