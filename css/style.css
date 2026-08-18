@@ -1972,8 +1972,8 @@ body.hero-bg .countdown__done {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--c-white);
-  background: #C9A24B;
+  color: var(--c-text);
+  background: #007FFF;
   border: none;
   padding: 0.95rem 2.5rem;
   cursor: pointer;
@@ -1981,7 +1981,7 @@ body.hero-bg .countdown__done {
 }
 
 .deadline-popup__btn:hover {
-  background: #B38F3D;
+  background: #0066CC;
 }
 
 @media (prefers-reduced-motion: reduce) {

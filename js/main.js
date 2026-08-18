@@ -298,12 +298,25 @@
     const overlay  = document.getElementById('deadline-popup-overlay');
     const closeBtn = document.getElementById('deadline-popup-close');
 
-    const closePopup = () => {
-      deadlinePopup.hidden = true;
-      localStorage.setItem(DEADLINE_POPUP_KEY, '1');
+    // localStorage peut lever une exception (navigation privée stricte,
+    // page ouverte en file://, stockage désactivé…) — on ignore l'erreur
+    // et on se comporte comme si le pop-up n'avait jamais été vu, pour
+    // ne jamais bloquer silencieusement tout le bloc à cause de ça.
+    const popupAlreadySeen = () => {
+      try { return !!localStorage.getItem(DEADLINE_POPUP_KEY); }
+      catch (_) { return false; }
+    };
+    const markPopupSeen = () => {
+      try { localStorage.setItem(DEADLINE_POPUP_KEY, '1'); }
+      catch (_) { /* stockage indisponible — tant pis, pas bloquant */ }
     };
 
-    if (!localStorage.getItem(DEADLINE_POPUP_KEY)) {
+    const closePopup = () => {
+      deadlinePopup.hidden = true;
+      markPopupSeen();
+    };
+
+    if (!popupAlreadySeen()) {
       setTimeout(() => {
         deadlinePopup.hidden = false;
       }, 3000);
