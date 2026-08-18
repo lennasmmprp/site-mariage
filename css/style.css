@@ -39,7 +39,7 @@
   --f-title: 'Pinyon Script', Georgia, serif;
   --f-sans:  'Jost', 'Helvetica Neue', Arial, sans-serif;
 
-  --header-h: 72px;
+  --header-h: 130px;
   --max-w:    1100px;
   --ease:     cubic-bezier(0.25, 0, 0.25, 1);
 }
@@ -170,16 +170,17 @@ video.plein-ecran::-webkit-media-controls-overlay-play-button {
 
 .header__logo-img {
   display: block;
-  height: 46px;
+  height: 96px;
   width: auto;
 }
 
 /* Page d'accueil — header sur fond sombre, logo inversé en blanc
    pour rester lisible (comme le texte de nav dans ce contexte),
-   et agrandi de 30% (46px -> 60px) */
+   et conservé plus grand que sur les autres pages (même ratio
+   qu'auparavant : +30% par rapport au logo de base) */
 body.hero-bg .header__logo-img {
   filter: brightness(0) invert(1);
-  height: 60px;
+  height: 120px;
 }
 
 .nav__list {
@@ -535,14 +536,15 @@ body.hero-bg .header__logo-img {
 .btn--primary:hover { background: var(--c-champagne-h); }
 
 .btn--outline {
-  background: transparent;
-  color: var(--c-olive);
-  border: 1px solid var(--c-olive);
+  background: var(--c-blue-pastel);
+  color: var(--c-white);
+  border: 1px solid var(--c-blue-pastel);
 }
 
 .btn--outline:hover {
-  background: var(--c-olive);
-  color: var(--c-cream);
+  background: #8ab5ba;
+  border-color: #8ab5ba;
+  color: var(--c-white);
 }
 
 /* ======================================================
@@ -1457,7 +1459,7 @@ body.hero-bg .countdown__done {
    Responsive
    ====================================================== */
 @media (max-width: 768px) {
-  :root { --header-h: 60px; }
+  :root { --header-h: 128px; }
 
   body.hero-bg { padding-top: 0; padding-bottom: 0; }
 
@@ -1756,11 +1758,11 @@ body.hero-bg .countdown__done {
 }
 
 .accordion__item {
-  border-top: 1px solid var(--c-sand-border);
+  border-top: 1px solid var(--c-blue-pastel);
 }
 
 .accordion__item:last-child {
-  border-bottom: 1px solid var(--c-sand-border);
+  border-bottom: 1px solid var(--c-blue-pastel);
 }
 
 .accordion__btn {
@@ -1775,7 +1777,7 @@ body.hero-bg .countdown__done {
   font-family: var(--f-serif);
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--c-olive);
+  color: var(--c-blue-pastel);
   text-align: left;
   cursor: pointer;
   transition: color 0.25s;
@@ -1909,5 +1911,77 @@ body.hero-bg .countdown__done {
     height: 34px;
     top: 0.75rem;
     right: 0.75rem;
+  }
+}
+
+/* ======================================================
+   Pop-up date limite RSVP
+   ====================================================== */
+.deadline-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.deadline-popup[hidden] { display: none; }
+
+.deadline-popup__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(38, 28, 20, 0.55);
+}
+
+.deadline-popup__box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background: var(--c-white);
+  border: 1.5px solid #C9A24B;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(38, 28, 20, 0.28);
+  animation: deadlinePopupIn 0.4s var(--ease);
+}
+
+@keyframes deadlinePopupIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.deadline-popup__text {
+  font-family: var(--f-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--c-blue);
+  line-height: 1.65;
+  margin-bottom: 1.85rem;
+}
+
+.deadline-popup__btn {
+  font-family: var(--f-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  background: #C9A24B;
+  border: none;
+  padding: 0.95rem 2.5rem;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.deadline-popup__btn:hover {
+  background: #B38F3D;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deadline-popup__box {
+    animation-duration: 1ms;
   }
 }

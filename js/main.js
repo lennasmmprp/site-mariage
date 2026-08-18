@@ -288,6 +288,35 @@
   }
 
   /* =====================================================
+     RSVP — Pop-up date limite (rsvp.html uniquement, une
+     seule fois — mémorisé dans localStorage)
+     ===================================================== */
+  const deadlinePopup = document.getElementById('deadline-popup');
+
+  if (deadlinePopup) {
+    const DEADLINE_POPUP_KEY = 'rsvpDeadlinePopupSeen';
+    const overlay  = document.getElementById('deadline-popup-overlay');
+    const closeBtn = document.getElementById('deadline-popup-close');
+
+    const closePopup = () => {
+      deadlinePopup.hidden = true;
+      localStorage.setItem(DEADLINE_POPUP_KEY, '1');
+    };
+
+    if (!localStorage.getItem(DEADLINE_POPUP_KEY)) {
+      setTimeout(() => {
+        deadlinePopup.hidden = false;
+      }, 3000);
+    }
+
+    closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', closePopup);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !deadlinePopup.hidden) closePopup();
+    });
+  }
+
+  /* =====================================================
      Partage de photos — envoi vers Google Drive
      ===================================================== */
   const photoForm         = document.getElementById('photo-form');
