@@ -572,6 +572,90 @@ img  { display: block; max-width: 100%; }
 }
 
 /* ======================================================
+   Page hero — bandeau image horizontal (Programme, Dress Code,
+   FAQ, RSVP, Partagez vos photos)
+   ====================================================== */
+.page-hero {
+  position: relative;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.page-hero__bg {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center center;
+  image-rendering: -webkit-optimize-contrast;
+  will-change: transform;
+  z-index: 0;
+}
+
+.page-hero__bg--programme {
+  object-position: center 70% !important;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.page-hero__title {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
+  font-family: var(--f-title);
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1.15;
+  color: var(--c-white);
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    height: 50vh;
+  }
+  .page-hero::after {
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .page-hero__title {
+    font-size: 28px;
+  }
+}
+
+/* Header transparent au sommet des pages à héros photo : logo et
+   icône menu inversés en blanc pour rester lisibles sur l'image
+   sombre (une fois "header--scrolled" actif, ils retrouvent leur
+   traitement normal sur fond clair). Sur mobile, seuls le logo et
+   l'icône sont concernés — le tiroir de menu, lui, garde un fond
+   clair et doit donc garder un texte foncé (voir plus bas). */
+body:has(.page-hero) .header:not(.header--scrolled) .header__logo-img {
+  filter: brightness(0) invert(1);
+}
+body:has(.page-hero) .header:not(.header--scrolled) .nav__toggle span {
+  background: var(--c-white);
+}
+@media (min-width: 769px) {
+  body:has(.page-hero) .header:not(.header--scrolled) .nav__link {
+    color: var(--c-white);
+  }
+}
+
+/* ======================================================
    Page banner (inner pages)
    ====================================================== */
 .page-banner {
