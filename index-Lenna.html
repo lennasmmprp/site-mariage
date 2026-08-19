@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mariage de Séverine et Yasser — 21 juillet 2027, Provence">
+  <title>Séverine &amp; Yasser — Mariage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=35">
+  <link rel="preload" as="image" href="image couv pc.jpg" fetchpriority="high">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body class="hero-bg">
+
+  <video id="hero-video" class="plein-ecran" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noremoteplayback noplaybackrate" tabindex="-1" aria-hidden="true">
+    <source src="vidéo couleur.mp4" type="video/mp4">
+  </video>
+  <picture>
+    <img id="hero-fallback" class="plein-ecran image-fond" src="image couv pc.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+  </picture>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo"><img src="logo.png" alt="Séverine &amp; Yasser" class="header__logo-img"></a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li><a href="index.html"     class="nav__link active" aria-current="page">Accueil</a></li>
+          <li><a href="programme.html" class="nav__link">Programme</a></li>
+          <li><a href="dresscode.html" class="nav__link">Dress Code</a></li>
+          <li><a href="faq.html"       class="nav__link">FAQ</a></li>
+          <li><a href="photos.html"    class="nav__link">Partagez vos photos</a></li>
+          <li><a href="rsvp.html"      class="nav__link nav__link--cta">Confirmez votre venue</a></li>
+        </ul>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle"
+              aria-label="Ouvrir le menu"
+              aria-expanded="false"
+              aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+
+        <!-- À PERSONNALISER : prénoms des mariés -->
+        <h1 class="hero__names">
+          <span class="hero__name hero__name--l">Séverine</span>
+          <span class="amp">et</span>
+          <span class="hero__name hero__name--r">Yasser</span>
+        </h1>
+
+        <p class="hero__subtitle">vous invitent à leur mariage</p>
+
+        <p class="hero__date">21 Juillet 2027</p>
+
+        <!-- Compte à rebours (mis à jour par js/main.js) -->
+        <div class="countdown" id="countdown" aria-live="polite" aria-label="Compte à rebours">
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-days">--</span>
+            <span class="countdown__label">Jours</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-hours">--</span>
+            <span class="countdown__label">Heures</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-minutes">--</span>
+            <span class="countdown__label">Minutes</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="cd-seconds">--</span>
+            <span class="countdown__label">Secondes</span>
+          </div>
+        </div>
+
+        <a href="rsvp.html" class="btn btn--primary">Répondre à l'invitation</a>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer footer--no-yellow">
+    <div class="footer__inner">
+      <p class="footer__names">Séverine &amp; Yasser</p>
+      <p class="footer__date">21 Juillet 2027</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=13"></script>
+</body>
+</html>
