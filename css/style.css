@@ -607,8 +607,8 @@ body.hero-bg .header__logo-img {
 
 @media (max-width: 768px) {
   .page-hero {
-    height: auto !important;
-    aspect-ratio: 16/9 !important;
+    height: 220px !important;
+    aspect-ratio: unset !important;
     overflow: hidden !important;
   }
   .page-hero::after {
@@ -622,6 +622,13 @@ body.hero-bg .header__logo-img {
     height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+  }
+
+  .header__logo img,
+  .nav__logo img,
+  img[alt="Séverine & Yasser"] {
+    height: 40px !important;
+    width: auto !important;
   }
 }
 
