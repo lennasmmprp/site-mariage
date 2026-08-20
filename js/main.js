@@ -295,8 +295,9 @@
 
   if (deadlinePopup) {
     const DEADLINE_POPUP_KEY = 'rsvpDeadlinePopupSeen';
-    const overlay  = document.getElementById('deadline-popup-overlay');
-    const closeBtn = document.getElementById('deadline-popup-close');
+    const overlay    = document.getElementById('deadline-popup-overlay');
+    const closeBtn   = document.getElementById('deadline-popup-close');
+    const confirmBtn = document.getElementById('deadline-popup-confirm');
 
     // localStorage peut lever une exception (navigation privée stricte,
     // page ouverte en file://, stockage désactivé…) — on ignore l'erreur
@@ -319,10 +320,14 @@
     if (!popupAlreadySeen()) {
       setTimeout(() => {
         deadlinePopup.hidden = false;
-      }, 3000);
+      }, 2000);
     }
 
     closeBtn.addEventListener('click', closePopup);
+    confirmBtn.addEventListener('click', () => {
+      closePopup();
+      document.getElementById('rsvp-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
     overlay.addEventListener('click', closePopup);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !deadlinePopup.hidden) closePopup();

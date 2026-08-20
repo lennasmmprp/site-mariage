@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=39">
+  <link rel="stylesheet" href="css/style.css?v=40">
   <link rel="preload" as="image" href="image fond/confirmez.jpg" fetchpriority="high">
   <meta http-equiv="Accept-CH" content="DPR, Width">
   <link rel="icon" type="image/png" href="logo.png">
@@ -175,10 +175,13 @@
     <div class="deadline-popup__overlay" id="deadline-popup-overlay"></div>
     <div class="deadline-popup__box" role="dialog" aria-modal="true" aria-labelledby="deadline-popup-text">
       <p id="deadline-popup-text" class="deadline-popup__text">Date limite pour confirmer votre présence&nbsp;: <strong>31 décembre 2026</strong></p>
-      <button type="button" class="deadline-popup__btn" id="deadline-popup-close">J'ai compris</button>
+      <div class="deadline-popup__actions">
+        <button type="button" class="deadline-popup__btn" id="deadline-popup-close">J'ai compris</button>
+        <button type="button" class="deadline-popup__btn deadline-popup__btn--primary" id="deadline-popup-confirm">Confirmer</button>
+      </div>
     </div>
   </div>
 
-  <script src="js/main.js?v=13"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>

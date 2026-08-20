@@ -1993,22 +1993,39 @@ body.hero-bg .countdown__done {
   margin-bottom: 1.85rem;
 }
 
+.deadline-popup__actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .deadline-popup__btn {
   font-family: var(--f-sans);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--c-text);
-  background: #007FFF;
+  background: var(--c-champagne);
+  color: var(--c-blue-pastel);
   border: none;
-  padding: 0.95rem 2.5rem;
+  border-radius: 30px;
+  padding: 0.95rem 2rem;
   cursor: pointer;
   transition: background 0.25s;
 }
 
 .deadline-popup__btn:hover {
-  background: #0066CC;
+  background: var(--c-champagne-h);
+}
+
+.deadline-popup__btn--primary {
+  background: var(--c-blue-pastel);
+  color: var(--c-champagne);
+}
+
+.deadline-popup__btn--primary:hover {
+  background: var(--c-blue-pastel-h);
 }
 
 @media (prefers-reduced-motion: reduce) {
