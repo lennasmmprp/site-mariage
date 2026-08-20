@@ -608,20 +608,27 @@ body.hero-bg .header__logo-img {
 @media (max-width: 768px) {
   .page-hero {
     height: 220px !important;
-    aspect-ratio: unset !important;
     overflow: hidden !important;
+    position: relative !important;
   }
   .page-hero::after {
     background: rgba(0, 0, 0, 0.55);
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
   .page-hero__title {
     font-size: 28px;
   }
   .page-hero__bg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center center !important;
   }
 
   .header__logo img,
