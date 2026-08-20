@@ -559,6 +559,8 @@ body.hero-bg .header__logo-img {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .page-hero__bg {
@@ -610,6 +612,8 @@ body.hero-bg .header__logo-img {
     height: 220px !important;
     overflow: hidden !important;
     position: relative !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
   .page-hero::after {
     background: rgba(0, 0, 0, 0.55);
