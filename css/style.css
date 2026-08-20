@@ -425,7 +425,7 @@ body.hero-bg .header__logo-img {
 
 .hero__names {
   font-family: var(--f-title);
-  font-size: clamp(2rem, 7.5vw, 4.75rem);
+  font-size: clamp(2rem, 6vw, 4rem) !important;
   font-weight: 400;
   line-height: 1.15;
   color: var(--c-olive);
