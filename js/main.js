@@ -288,40 +288,23 @@
   }
 
   /* =====================================================
-     RSVP — Pop-up date limite (rsvp.html uniquement, une
-     seule fois — mémorisé dans localStorage)
+     RSVP — Pop-up date limite (rsvp.html uniquement,
+     affiché à chaque visite de la page)
      ===================================================== */
   const deadlinePopup = document.getElementById('deadline-popup');
 
   if (deadlinePopup) {
-    const DEADLINE_POPUP_KEY = 'rsvpDeadlinePopupSeen';
     const overlay    = document.getElementById('deadline-popup-overlay');
     const closeBtn   = document.getElementById('deadline-popup-close');
     const confirmBtn = document.getElementById('deadline-popup-confirm');
 
-    // localStorage peut lever une exception (navigation privée stricte,
-    // page ouverte en file://, stockage désactivé…) — on ignore l'erreur
-    // et on se comporte comme si le pop-up n'avait jamais été vu, pour
-    // ne jamais bloquer silencieusement tout le bloc à cause de ça.
-    const popupAlreadySeen = () => {
-      try { return !!localStorage.getItem(DEADLINE_POPUP_KEY); }
-      catch (_) { return false; }
-    };
-    const markPopupSeen = () => {
-      try { localStorage.setItem(DEADLINE_POPUP_KEY, '1'); }
-      catch (_) { /* stockage indisponible — tant pis, pas bloquant */ }
-    };
-
     const closePopup = () => {
       deadlinePopup.hidden = true;
-      markPopupSeen();
     };
 
-    if (!popupAlreadySeen()) {
-      setTimeout(() => {
-        deadlinePopup.hidden = false;
-      }, 2000);
-    }
+    setTimeout(() => {
+      deadlinePopup.hidden = false;
+    }, 2000);
 
     closeBtn.addEventListener('click', closePopup);
     confirmBtn.addEventListener('click', () => {
