@@ -291,29 +291,22 @@
      RSVP — Pop-up date limite (rsvp.html uniquement,
      affiché à chaque visite de la page)
      ===================================================== */
-  const deadlinePopup = document.getElementById('deadline-popup');
+  const deadlinePopup = document.getElementById('popup-deadline');
 
   if (deadlinePopup) {
-    const overlay    = document.getElementById('deadline-popup-overlay');
-    const closeBtn   = document.getElementById('deadline-popup-close');
-    const confirmBtn = document.getElementById('deadline-popup-confirm');
+    const closeBtn = document.getElementById('btn-compris');
 
     const closePopup = () => {
-      deadlinePopup.hidden = true;
+      deadlinePopup.classList.remove('visible');
     };
 
     setTimeout(() => {
-      deadlinePopup.hidden = false;
+      deadlinePopup.classList.add('visible');
     }, 2000);
 
     closeBtn.addEventListener('click', closePopup);
-    confirmBtn.addEventListener('click', () => {
-      closePopup();
-      document.getElementById('rsvp-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    overlay.addEventListener('click', closePopup);
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !deadlinePopup.hidden) closePopup();
+      if (e.key === 'Escape' && deadlinePopup.classList.contains('visible')) closePopup();
     });
   }
 
