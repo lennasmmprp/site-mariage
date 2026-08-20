@@ -607,13 +607,21 @@ body.hero-bg .header__logo-img {
 
 @media (max-width: 768px) {
   .page-hero {
-    height: 100vh;
+    height: auto !important;
+    aspect-ratio: 16/9 !important;
+    overflow: hidden !important;
   }
   .page-hero::after {
     background: rgba(0, 0, 0, 0.55);
   }
   .page-hero__title {
     font-size: 28px;
+  }
+  .page-hero__bg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 }
 
