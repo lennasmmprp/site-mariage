@@ -1443,6 +1443,11 @@ body.hero-bg {
   padding-bottom: 20px;
 }
 
+body.hero-bg .header {
+  background: transparent !important;
+  opacity: 0.85 !important;
+}
+
 body.hero-bg .header__logo,
 body.hero-bg .nav__link {
   color: var(--c-olive);
