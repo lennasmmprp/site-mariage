@@ -441,8 +441,8 @@ body.hero-bg .header__logo-img {
   font-family: var(--f-serif);
   font-style: italic;
   color: var(--c-olive);
-  font-weight: 300;
-  font-size: 0.68em;
+  font-weight: 400;
+  font-size: 0.85em;
   vertical-align: middle;
   margin: 0 0.15em;
 }
