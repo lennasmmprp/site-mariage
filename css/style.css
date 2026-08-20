@@ -438,6 +438,7 @@ body.hero-bg .header__logo-img {
 
 .hero__names .amp {
   display: inline-block;
+  font-family: var(--f-serif);
   font-style: italic;
   color: var(--c-olive);
   font-weight: 300;
