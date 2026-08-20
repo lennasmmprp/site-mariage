@@ -1443,12 +1443,6 @@ body.hero-bg {
   padding-bottom: 20px;
 }
 
-body.hero-bg .header {
-  background: rgba(38, 28, 20, 0.38);
-}
-body.hero-bg .header--scrolled {
-  background: rgba(38, 28, 20, 0.58);
-}
 body.hero-bg .header__logo,
 body.hero-bg .nav__link {
   color: var(--c-olive);
