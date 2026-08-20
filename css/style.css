@@ -187,7 +187,7 @@ body.hero-bg .header__logo-img {
 .header__logo img,
 .nav__logo img,
 img[alt="Séverine & Yasser"] {
-  height: 45px !important;
+  height: 52px !important;
   width: auto !important;
 }
 
@@ -646,7 +646,7 @@ img[alt="Séverine & Yasser"] {
   .header__logo img,
   .nav__logo img,
   img[alt="Séverine & Yasser"] {
-    height: 46px !important;
+    height: 52px !important;
     width: auto !important;
   }
 }
