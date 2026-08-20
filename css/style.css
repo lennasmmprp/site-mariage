@@ -183,6 +183,14 @@ body.hero-bg .header__logo-img {
   height: 120px;
 }
 
+/* Taille du logo uniforme sur toutes les pages desktop */
+.header__logo img,
+.nav__logo img,
+img[alt="Séverine & Yasser"] {
+  height: 45px !important;
+  width: auto !important;
+}
+
 .nav__list {
   display: flex;
   align-items: center;
