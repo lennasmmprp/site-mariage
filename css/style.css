@@ -646,8 +646,33 @@ img[alt="Séverine & Yasser"] {
   .header__logo img,
   .nav__logo img,
   img[alt="Séverine & Yasser"] {
-    height: 52px !important;
+    height: 68px !important;
     width: auto !important;
+  }
+
+  /* Header compact (Programme, Dress Code, FAQ, Partagez vos photos) :
+     plus fin, marge gauche/droite, fond blanc opaque en permanence */
+  body.header-compact .header {
+    height: 88px;
+    left: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.97) !important;
+  }
+  body.header-compact .header:not(.header--scrolled) .header__logo-img {
+    filter: none !important;
+  }
+  body.header-compact .header:not(.header--scrolled) .nav__toggle span {
+    background: var(--c-olive) !important;
+  }
+  body.header-compact .nav {
+    top: 88px;
+    background: var(--c-white) !important;
+  }
+
+  /* L'image de fond du page-hero doit commencer sous le header
+     compact, pas derriere lui en transparence */
+  body.header-compact .page-hero {
+    margin-top: 88px !important;
   }
 }
 
