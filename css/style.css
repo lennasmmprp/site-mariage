@@ -692,6 +692,31 @@ body:has(.page-hero) .header:not(.header--scrolled) .nav__toggle span {
   }
 }
 
+/* Header compact (Programme, Dress Code, FAQ, Partagez vos photos, RSVP) :
+   meme traitement qu'en mobile mais applique aussi en desktop - fond blanc
+   opaque en permanence, logo/burger fonces au lieu du blanc invert */
+body.header-compact .header {
+  background: rgba(255, 255, 255, 0.97) !important;
+}
+body.header-compact .header:not(.header--scrolled) .header__logo-img {
+  filter: none !important;
+}
+body.header-compact .header:not(.header--scrolled) .nav__toggle span {
+  background: var(--c-olive) !important;
+}
+@media (min-width: 769px) {
+  body.header-compact .header:not(.header--scrolled) .nav__link {
+    color: var(--c-olive) !important;
+  }
+
+  /* L'image de fond du page-hero doit commencer sous le header,
+     pas derriere lui en transparence (equivalent desktop de la
+     regle mobile margin-top:88px ci-dessus) */
+  body.header-compact .page-hero {
+    margin-top: var(--header-h) !important;
+  }
+}
+
 /* ======================================================
    Page banner (inner pages)
    ====================================================== */
