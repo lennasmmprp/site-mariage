@@ -1526,18 +1526,13 @@ body.hero-bg .countdown__done {
   body.hero-bg { padding-top: 0; padding-bottom: 0; }
 
   body.hero-bg .header {
-    height: 88px;
-    background-color: #FFFFFF !important;
-    opacity: 1 !important;
-    backdrop-filter: none !important;
-  }
-
-  body.hero-bg .header__logo-img {
-    filter: none !important;
+    height: 64px;
+    background: rgba(0,0,0,0.25) !important;
+    backdrop-filter: blur(2px) !important;
   }
 
   body.hero-bg .nav {
-    top: 88px;
+    top: 64px;
     background-color: #FFFFFF !important;
     opacity: 1 !important;
     backdrop-filter: none !important;
