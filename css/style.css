@@ -1529,13 +1529,20 @@ body.hero-bg .countdown__done {
 
   body.hero-bg .header {
     height: 88px;
-    background: transparent !important;
-    opacity: 0.85 !important;
+    background-color: #FFFFFF !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+  }
+
+  body.hero-bg .header__logo-img {
+    filter: none !important;
   }
 
   body.hero-bg .nav {
     top: 88px;
-    background: var(--c-white) !important;
+    background-color: #FFFFFF !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
   }
 
   .hero { padding: 0; min-height: 100dvh; }
