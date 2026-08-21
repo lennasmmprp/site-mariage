@@ -654,8 +654,6 @@ img[alt="Séverine & Yasser"] {
      plus fin, marge gauche/droite, fond blanc opaque en permanence */
   body.header-compact .header {
     height: 88px;
-    left: 12px;
-    right: 12px;
     background: rgba(255, 255, 255, 0.97) !important;
   }
   body.header-compact .header:not(.header--scrolled) .header__logo-img {
@@ -1587,8 +1585,14 @@ body.hero-bg .countdown__done {
 
   .nav__link { font-size: 0.9rem; }
 
+  .nav__list li:has(.nav__link--cta) {
+    align-self: stretch;
+  }
+
   .nav__link--cta {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    text-align: center;
     margin-top: 0.5rem;
   }
 
