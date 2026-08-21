@@ -1462,8 +1462,12 @@ body.flat-bg .header--scrolled {
    les autres pages, qui n'ont pas l'image de fond)
    ====================================================== */
 body.hero-bg {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed !important;
+  width: 100% !important;
 }
 
 body.hero-bg .header {
